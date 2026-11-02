@@ -1,0 +1,7 @@
+---
+strip-doc-title: true
+title: "The question and the reasoning"
+toc: true
+---
+
+{{< include ../docs/project-context.md >}}

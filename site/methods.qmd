@@ -1,4 +1,5 @@
 ---
+strip-doc-title: true
 title: "Methods & interpretation"
 toc: true
 ---

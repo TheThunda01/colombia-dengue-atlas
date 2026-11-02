@@ -8,7 +8,9 @@ toc: true
 [Weekly department/event panel (CSV)](data/surveillance_weekly.csv) ·
 [Annual populations (CSV)](data/population.csv) ·
 [Display boundaries (GeoJSON)](data/departments.geojson) ·
-[Full surveillance audit (JSON)](data/surveillance_audit.json)
+[Full surveillance audit (JSON)](data/surveillance_audit.json) ·
+[Four-map comparison table (CSV)](data/map_comparison.csv) ·
+[Reusable figures](figures.qmd)
 
 For a filtered download, use the [explorer](explore.qmd). These full-panel
 downloads retain missing cells; they are not a complete case-capture claim.

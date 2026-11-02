@@ -38,6 +38,8 @@ The first release covers four closed surveillance years, **2019–2022**, from o
 
 ## Four years, one transparent comparison
 
+[Compare all four years on a shared map scale →](figures.qmd)
+
 ![Recorded INS dengue event 210 counts by source epidemiological week in 2019–2022. Lines show weekly sums of available department records, with missing department-week combinations described in the methods.](figures/weekly-comparison.svg)
 
 The figure sums available event 210 records across the 32 departments. It does not establish complete case capture. The interactive explorer exposes the source-row availability behind each selection.
@@ -51,6 +53,8 @@ The figure sums available event 210 records across the 32 departments. It does n
 Python prepares versioned aggregates, checks geographic identifiers, and joins annual population estimates. Quarto builds the website. All exploration then runs in your browser with the same local data used by the summary table.
 
 [Sources, licenses, and data dictionary →](data.qmd)
+
+[Follow the annotated build guide](build-guide.qmd) · [Compare free visualization tools](tools.qmd)
 :::
 ::: {}
 ## A research demonstration

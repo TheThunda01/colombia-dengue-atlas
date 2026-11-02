@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
+import xml.etree.ElementTree as ET
 
 from playwright.sync_api import sync_playwright
 
@@ -65,6 +66,13 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         assert len([r for r in rows if r['department_code']=='11' and r['cases']==''])==4
         assert 'all-2019-2022' in name
         checks.append('Default summary CSV agrees with table and source totals; Bogota remains blank')
+        # A rate color must retain its meaning as the selected time window changes.
+        select('metric','rate')
+        rate_legend=page.locator('#map-legend .legend-endpoints').all_text_contents()
+        rate_gradient=page.locator('#map-legend .rate-gradient').evaluate('(el)=>getComputedStyle(el).backgroundImage')
+        assert rate_gradient!='none'
+        assert float(page.locator('#map-legend .legend-endpoints span').last.inner_text().replace(',',''))>0
+        select('metric','cases')
         select('department','08');select('year-start',2020);select('year-end',2021);number('week-start',10);number('week-end',20)
         rows,_=downloaded('download');weekly,_=downloaded('download-weekly')
         assert len(rows)==2 and len(weekly)==22 and all(r['department_code']=='08' for r in weekly)
@@ -76,16 +84,42 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         select('metric','rate')
         assert 'Mean of yearly' in page.locator('#map-subtitle').inner_text()
         assert page.locator('#map-container circle').count()==0
+        assert page.locator('#map-legend .legend-endpoints').all_text_contents()==rate_legend
+        assert page.locator('#map-legend .rate-gradient').evaluate('(el)=>getComputedStyle(el).backgroundImage')==rate_gradient
+        assert 'Fixed color scale for event 210' in page.locator('#map-legend').inner_text()
+        checks.append('Rate legend endpoints and gradient stay fixed after department, year and week filters change')
         for r in rows:
             if r['cases']:assert abs(float(r['cases_per_100k'])-int(r['cases'])/int(r['population_total'])*100000)<1e-9
         saved_url=page.url;page.reload(wait_until='domcontentloaded');ready();assert page.locator('#department').input_value()=='08' and page.locator('#week-start').input_value()=='10'
         checks.append('Department/year/week/rate filters, persisted URL, timeline and seasonal series agree with both CSV exports and year-specific rate arithmetic')
         page.locator('#map-container path[data-code="11"]').focus();page.keyboard.press('Enter');ready()
         assert page.locator('#department').input_value()=='11' and page.locator('#kpi-cases').inner_text()=='No data'
+        assert page.locator('#map-container path[data-code="11"]').evaluate('(el)=>el===document.activeElement')
+        assert page.locator('#map-container path[data-code="11"]').get_attribute('aria-pressed')=='true'
         assert 'No source rows' in page.locator('#timeline').inner_text()
         rows,_=downloaded('download');assert all(r['cases']=='' and r['cases_per_100k']=='' for r in rows)
         assert all(int(r['population_total'])>0 for r in rows)
+        detail=page.locator('#map-detail')
+        assert detail.is_visible() and detail.get_attribute('aria-live')=='polite'
+        assert 'Bogotá' in detail.inner_text() and 'No data' in detail.inner_text()
+        expected=sum(int(r['expected_weeks']) for r in rows)
+        assert f'0 of {expected:,} department-week cells have source rows.' in detail.inner_text()
+        assert 'Absent cells remain missing.' in detail.inner_text()
+        assert page.locator('#map-container path[data-code="11"]').get_attribute('fill')=='url(#missing)'
         checks.append('Keyboard map selection and Bogota empty state preserve unavailable counts/rates despite available population')
+        # Rerendering replaces SVG paths and ranking buttons: keyboard focus must follow.
+        for code in ['05','11']:
+            button=page.locator(f'#rank-table button[data-code="{code}"]')
+            button.focus();page.keyboard.press('Enter');ready()
+            assert page.locator('#department').input_value()==code
+            assert button.evaluate('(el)=>el===document.activeElement')
+            assert button.get_attribute('aria-pressed')=='true'
+        assert 'Bogotá' in detail.inner_text() and f'0 of {expected:,}' in detail.inner_text()
+        page.locator('#map-container path[data-code="05"]').focus();page.keyboard.press('Space');ready()
+        assert page.locator('#department').input_value()=='05'
+        assert page.locator('#map-container path[data-code="05"]').evaluate('(el)=>el===document.activeElement')
+        assert 'No data' not in detail.inner_text()
+        checks.append('Persistent map detail exposes missing-row coverage; map Enter/Space and ranking Enter retain focus after selection')
         page.locator('#reset').click();ready();assert page.locator('#kpi-cases').inner_text()=='313,814'
         select('event','220');assert page.locator('#kpi-cases').inner_text()=='4,461'
         select('department','97');select('year-start',2019);select('year-end',2019)
@@ -103,33 +137,83 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         rows,_=downloaded('download');assert {r['year'] for r in rows}=={'2020'}
         checks.append('Week53-only export includes only2020; other years are not invented')
         page.locator('#reset').click();ready()
+        page.locator('#map-container path[data-code="05"]').focus()
         page.set_viewport_size({'width':390,'height':844})
+        page.wait_for_function("Array.from(document.querySelectorAll('#timeline .xtick text')).map(el=>el.textContent).join(',') === '2019,2020,2021,2022'")
+        assert page.locator('#map-container path[data-code="05"]').evaluate('(el)=>el===document.activeElement')
         page.reload(wait_until='domcontentloaded');ready()
         assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
         assert page.locator('#reset').is_visible()
         select('department','13');assert page.locator('#department').input_value()=='13'
         page.locator('#reset').click();ready()
+        assert page.locator('#timeline .xtick text').all_text_contents()==['2019','2020','2021','2022']
+        select('year-start',2021);select('year-end',2021);number('week-start',10);number('week-end',20)
+        assert page.locator('#timeline .xtick text').all_text_contents()==['2021']
+        assert page.locator('#timeline').evaluate('(el)=>el.data[0].x')==[f'2021-W{week:02}' for week in range(10,21)]
+        page.locator('#reset').click();ready()
         page.screenshot(path=str(screenshots/'mobile.png'),full_page=True)
         page.screenshot(path=str(screenshots/'mobile-viewport.png'))
         page.locator('#seasonal').scroll_into_view_if_needed();page.screenshot(path=str(screenshots/'mobile-seasonal.png'))
         checks.append('390px mobile portrait: filters/reset work, charts render, no page overflow; screenshots captured')
-        page.set_viewport_size({'width':844,'height':390});page.reload(wait_until='domcontentloaded');ready();assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        checks.append('Mobile timeline labels show years only while retaining weekly data and a label for a partial-year selection')
+        page.locator('#rank-table button[data-code="05"]').focus()
+        page.set_viewport_size({'width':844,'height':390})
+        page.wait_for_function("Array.from(document.querySelectorAll('#timeline .xtick text')).some(el=>el.textContent.includes(' W'))")
+        assert page.locator('#rank-table button[data-code="05"]').evaluate('(el)=>el===document.activeElement')
+        checks.append('Crossing the 650px chart breakpoint updates time labels without losing focused map paths or ranking buttons')
+        page.reload(wait_until='domcontentloaded');ready();assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
         checks.append('844px narrow landscape: no page overflow')
         page.set_viewport_size({'width':1440,'height':1000})
-        for name in ['index.html','methods.html','data.html']:
+        document_pages=['index.html','methods.html','data.html','build-guide.html','tools.html','reasoning.html','glossary.html','figures.html']
+        navigation={};checked_links=set();figure_downloads=set()
+        for name in document_pages:
             resp=page.goto(urljoin(url,name),wait_until='domcontentloaded');assert resp.status==200
             assert page.locator('h1').count()>0
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),name
             if name=='data.html':assert '122,992' in page.locator('main').inner_text()
-            if name=='index.html':
+            if name in ['index.html','figures.html']:
                 page.wait_for_function("Array.from(document.querySelectorAll('img')).every(i=>i.complete&&i.naturalWidth>0)")
-                page.screenshot(path=str(screenshots/'overview.png'),full_page=True)
+                page.screenshot(path=str(screenshots/('overview.png' if name=='index.html' else 'figures.png')),full_page=True)
             # Validate local navigation/assets linked from each main page.
             links=page.locator('a[href]').evaluate_all('(links)=>links.map(a=>a.href)')
+            navigation[name]={target.split('#')[0] for target in links if target.startswith(url)}
             for target in set(links):
-                if target.startswith(url) and '#' not in target:
+                if target.startswith(url) and '#' not in target and target not in checked_links:
                     response=context.request.head(target)
                     assert response.status==200,(target,response.status)
+                    checked_links.add(target)
+                # Check actual exported bytes, not only a successful HTML fallback.
+                suffix=Path(urlparse(target).path).suffix.lower()
+                if target.startswith(urljoin(url,'figures/')) and suffix in {'.svg','.png','.pdf'} and target not in figure_downloads:
+                    response=context.request.get(target);assert response.status==200
+                    content=response.body();assert content,target
+                    if suffix=='.svg':assert ET.fromstring(content).tag.endswith('svg'),target
+                    if suffix=='.png':assert content.startswith(b'\x89PNG\r\n\x1a\n'),target
+                    if suffix=='.pdf':assert content.startswith(b'%PDF-'),target
+                    figure_downloads.add(target)
+            if name=='figures.html':
+                assert {Path(urlparse(target).path).suffix.lower() for target in links if target.startswith(urljoin(url,'figures/'))}>={'.svg','.png','.pdf'}
+            if name not in ['index.html','methods.html','data.html']:
+                page.set_viewport_size({'width':390,'height':844})
+                assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),name
+                # Very long full-page captures can repeat tiles; use readable viewports for the guide.
+                page.screenshot(path=str(screenshots/(name.replace('.html','')+'-mobile.png')),full_page=name!='build-guide.html')
+                if name=='build-guide.html':
+                    page.locator('pre').filter(has_text='export function selectedRows').scroll_into_view_if_needed()
+                    page.screenshot(path=str(screenshots/'build-guide-code-mobile.png'))
+                page.set_viewport_size({'width':1440,'height':1000})
         checks.append('Overview, methods, data and same-site links return200; executed Python source table and exported figure load')
+        # Every documentation page must be discoverable from the overview, not just exist.
+        reachable={urljoin(url,'index.html')};pending=['index.html']
+        while pending:
+            current=pending.pop()
+            for target in navigation[current]:
+                child=next((name for name in document_pages if urljoin(url,name)==target),None)
+                if child and target not in reachable:
+                    reachable.add(target);pending.append(child)
+        assert {urljoin(url,name) for name in document_pages}<=reachable
+        checks.append('Build guide, tools, reasoning, glossary and figures load without desktop/mobile overflow and are reachable through site navigation')
+        checks.append('Figure download links serve valid nonempty SVG, PNG and PDF files')
         # Verify a visible failure state using a separate page with deliberate network failure.
         offline=context.new_page();offline.route('**/data/atlas.json',lambda route:route.abort())
         offline.goto(urljoin(url,'explore.html'),wait_until='domcontentloaded');offline.locator('#app-error').wait_for(state='visible')
@@ -140,7 +224,7 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         browser.close()
     report={'checked_at_utc':datetime.now(timezone.utc).isoformat(),'url':url,'browser_channel':channel or 'chromium',
             'checks':checks,'page_errors':errors,'http_errors':failed,'passed':True,
-            'visual_review':'Screenshots captured; human/model visual review is recorded separately in RELEASE_REPORT.md.'}
+            'visual_review':'Screenshots captured; human/model visual review is recorded separately in reports/visual-guide-review-2026-11-02.md.'}
     (ROOT/'reports'/report_name).write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,indent=2))
 

@@ -5,7 +5,9 @@ from bs4 import BeautifulSoup
 
 ROOT=Path(__file__).resolve().parents[1]/'site/_site'
 checked=0
-for path in ROOT.glob('*.html'):
+pages=list(ROOT.glob('*.html'))
+assert pages, 'No rendered pages found'
+for path in pages:
     soup=BeautifulSoup(path.read_text(encoding='utf-8'),'html.parser')
     for element in soup.select('a[href],script[src],img[src],link[href]'):
         value=element.get('href',element.get('src',''))
@@ -18,4 +20,4 @@ for path in ROOT.glob('*.html'):
         checked+=1
     for script in soup.select('script[src]'):
         assert not urlparse(script['src']).scheme,'External script dependency'
-print(f'Checked {checked} local references and self-hosted scripts across4 rendered pages.')
+print(f'Checked {checked} local references and self-hosted scripts across {len(pages)} rendered pages.')

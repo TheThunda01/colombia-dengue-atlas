@@ -112,6 +112,16 @@ export function mapSummaries(data, s) {
     };
   });
 }
+// A full-year maximum bounds any selected-week annual mean for nonnegative counts.
+// Derive it from the pinned snapshot once per event, never from the active filters.
+export function rateScaleMaximum(data, event) {
+  return Math.max(
+    1,
+    ...summaries(data, { ...defaults, event }, true).map(
+      (row) => row.cases_per_100k ?? 0,
+    ),
+  );
+}
 export function timeSeries(data, s) {
   const groups = new Map();
   for (const r of selectedRows(data, s)) {

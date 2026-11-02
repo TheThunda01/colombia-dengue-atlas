@@ -1,0 +1,9 @@
+---
+strip-doc-title: true
+title: "How the atlas was built"
+toc: true
+toc-depth: 2
+code-copy: true
+---
+
+{{< include ../docs/build-guide.md >}}

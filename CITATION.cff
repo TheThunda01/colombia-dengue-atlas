@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "Please cite this software and retain the source-dataset citations in docs/sources.md and DATA_LICENSE.md."
 type: software
 title: "Colombia Dengue Surveillance Atlas"
-version: 1.0.0
+version: 1.1.0
 authors:
   - family-names: Huynh
     given-names: Brandon

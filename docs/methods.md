@@ -109,9 +109,15 @@ units. Filters are encoded in the URL and support browser back/forward.
 
 Counts use proportional circles with area proportional to value. Population
 normalization uses a sequential choropleth. No-data polygons are hatched.
-The color scale recalculates with the selected period; compare values using
-the visible legend and table rather than color alone. The seasonal traces
-share a linear zero-based y-axis and distinct year labels.
+The interactive color scale is fixed per event at the largest full-year
+department normalized count in 2019–2022. It does not change when the selected
+years or weeks change. The circle-size scale adapts to the current period and
+is labeled accordingly. The separate four-year map plate uses one shared
+zero-to-2,500 scale and a different sequential palette; use each view's legend
+rather than matching colors between the two designs. The seasonal traces share
+a linear zero-based y-axis and distinct year labels. The selected department's
+map value and present/expected source-week counts are also shown in a persistent
+detail panel, so their meaning does not depend on hovering over a small polygon.
 
 Both CSV buttons use the same filtered model as the views. Summary CSV rows
 include population, rate, source-row availability, requested and actual week

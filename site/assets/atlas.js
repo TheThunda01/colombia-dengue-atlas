@@ -4,6 +4,7 @@ import {
   selectedRows,
   summaries,
   mapSummaries,
+  rateScaleMaximum,
   timeSeries,
   sumPresent,
   csv,
@@ -40,6 +41,7 @@ const bindings = {
 };
 let data,
   state,
+  rateMaxima,
   latestSummary = [],
   latestWeekly = [],
   renderToken = 0;
@@ -52,10 +54,19 @@ function stateUrl() {
   return "?" + p;
 }
 function selectDepartment(code) {
+  const active = document.activeElement;
+  const fromMap = active?.matches("path[data-code]");
+  const fromRanking = active?.matches("#rank-table button");
   state.department = code;
   setControls();
   history.pushState(null, "", stateUrl());
   render();
+  if (fromMap || fromRanking) {
+    const container = fromMap ? $("map-container") : $("rank-table");
+    container
+      .querySelector(`[data-code="${code}"]`)
+      ?.focus({ preventScroll: true });
+  }
 }
 function download(rows, kind) {
   const blob = new Blob(["\uFEFF" + csv(rows)], {
@@ -70,8 +81,10 @@ function download(rows, kind) {
 function renderMap() {
   const map = mapSummaries(data, state),
     val = (d) => (state.metric === "rate" ? d.rate : d.cases),
-    max = Math.max(1, ...map.map((d) => val(d) ?? 0)),
-    rate = state.metric === "rate";
+    rate = state.metric === "rate",
+    max = rate
+      ? rateMaxima[state.event]
+      : Math.max(1, ...map.map((d) => d.cases ?? 0));
   $("map-subtitle").textContent = rate
     ? "Mean of yearly selected-week cases per 100,000 total residents. Each year uses its own DANE population."
     : "Circle area is proportional to recorded cases summed across the selected years and weeks.";
@@ -110,9 +123,15 @@ function renderMap() {
         }
       });
     });
+  const missingKey =
+    '<span class="legend-key"><span class="legend-swatch missing-swatch"></span>No usable value</span>';
   $("map-legend").innerHTML = rate
-    ? `<span style="display:inline-block;width:100px;height:10px;background:linear-gradient(90deg,#e5f1ed,#166b70)"></span> 0–${dec(max)} per 100,000 · <span class="legend-swatch" style="background:repeating-linear-gradient(135deg,#e5e6e4,#e5e6e4 3px,#919b98 4px)"></span>No usable value`
-    : `<svg width="106" height="54" viewBox="0 0 106 54" aria-hidden="true"><circle cx="28" cy="27" r="24" fill="#166b70" fill-opacity=".58"/><circle cx="77" cy="27" r="12" fill="#166b70" fill-opacity=".58"/></svg> ${fmt(max)} / ${fmt(Math.round(max / 4))} cases · Hatched: no usable value`;
+    ? `<div class="rate-legend"><div class="rate-gradient"></div><div class="legend-endpoints"><span>0</span><span>${dec(max)}</span></div><span>Recorded cases per 100,000 residents</span></div>${missingKey}<p class="legend-note">Fixed color scale for event ${state.event}, 2019–2022. Colors stay comparable when you change the period.</p>`
+    : `${map.some((d) => d.cases !== null) ? `<span class="legend-key"><svg width="50" height="50" aria-hidden="true"><circle cx="25" cy="25" r="24" fill="#166b70" fill-opacity=".58"/></svg>${fmt(max)} cases</span><span class="legend-key"><svg width="26" height="50" aria-hidden="true"><circle cx="13" cy="25" r="12" fill="#166b70" fill-opacity=".58"/></svg>${dec(max / 4)} cases</span>` : "<span>No recorded values in this period.</span>"}${missingKey}<p class="legend-note">Circle area represents count. Symbol sizes rescale for the current period.</p>`;
+  const focused = map.find((d) => d.code === state.department);
+  $("map-detail").innerHTML = focused
+    ? `<strong>${escape(focused.name)}</strong><span>${rate ? dec(focused.rate) + " per 100,000 residents (mean)" : fmt(focused.cases) + " recorded cases"}</span><span>${fmt(focused.present)} of ${fmt(focused.expected)} department-week cells have source rows. ${focused.present < focused.expected ? "Absent cells remain missing." : "Row availability does not establish complete case capture."}</span>`
+    : "<strong>Select a department</strong><span>Use the map or ranking to see its value and source-row availability here.</span>";
   const ranked = [...map].sort((a, b) => (val(b) ?? -1) - (val(a) ?? -1));
   $("rank-description").textContent = rate
     ? "Mean across the selected years, using only the selected weeks. This is not an official dengue incidence measure."
@@ -168,14 +187,20 @@ async function renderPlots() {
   const token = renderToken;
   for (const id of ["timeline", "seasonal"])
     if (!$(id).classList.contains("js-plotly-plot")) $(id).innerHTML = "";
-  const tick = series.filter(
-      (r, i) => i === 0 || r.week === 1 || r.week === 26,
+  const narrow = window.matchMedia("(max-width: 650px)").matches;
+  const tick = series.filter((r, i) =>
+      narrow
+        ? i === 0 || r.year !== series[i - 1].year
+        : i === 0 || r.week === 1 || r.week === 26,
     ),
     l = layout();
   l.xaxis = {
     ...l.xaxis,
     tickvals: tick.map((r) => r.label),
-    ticktext: tick.map((r) => `${r.year} W${r.week}`),
+    ticktext: tick.map((r) =>
+      narrow ? String(r.year) : `${r.year} W${r.week}`,
+    ),
+    tickangle: 0,
     title: { text: "Source epidemiological year / week" },
   };
   await Plotly.react(
@@ -298,6 +323,9 @@ async function boot() {
   const response = await fetch("data/atlas.json");
   if (!response.ok) throw Error(`Data request returned ${response.status}`);
   data = await response.json();
+  rateMaxima = Object.fromEntries(
+    ["210", "220"].map((event) => [event, rateScaleMaximum(data, event)]),
+  );
   $("department").innerHTML =
     '<option value="all">All departments + Bogotá</option>' +
     data.departments
@@ -339,6 +367,9 @@ async function boot() {
     setControls();
     render();
   });
+  window
+    .matchMedia("(max-width: 650px)")
+    .addEventListener("change", () => renderPlots());
   $("download").addEventListener("click", () =>
     download(latestSummary, "summary"),
   );

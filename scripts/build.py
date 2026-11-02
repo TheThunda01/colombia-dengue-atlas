@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from plotly.offline import get_plotlyjs
+from cartographic_plate import build_plate
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -123,10 +124,16 @@ def main() -> None:
     if args.prepare:
         for script,extra in [('prepare_surveillance.py',[]),('prepare_geography.py',['--download'])]:
             subprocess.run([sys.executable,str(ROOT/'scripts'/script),*extra],cwd=ROOT,check=True)
+    plate = build_plate()
+    if "inkscape_export" not in plate:
+        raise RuntimeError("Map exports do not match the generated SVG. Run scripts/cartographic_plate.py --inkscape PATH before publishing.")
     payload=bundle();figure(payload)
+    shutil.copyfile(ROOT/'data/processed/map_comparison.csv', ROOT/'site/data/map_comparison.csv')
+    for file in (ROOT/'figures').glob('map-comparison.*'):
+        shutil.copyfile(file, ROOT/'site/figures'/file.name)
     if not args.no_render:
         subprocess.run([sys.executable,str(ROOT/'scripts/site.py'),'render'],cwd=ROOT,check=True)
-    print('Built 13,794 surveillance cells, 132 denominators, 33 map units and SVG/PNG/PDF figure.')
+    print('Built 13,794 surveillance cells, 132 denominators, 33 map units and two SVG/PNG/PDF figures.')
 
 
 if __name__=='__main__':

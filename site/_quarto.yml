@@ -18,16 +18,28 @@ website:
         text: Overview
       - href: explore.qmd
         text: Explore
+      - href: figures.qmd
+        text: Figures
       - href: methods.qmd
         text: Methods
       - href: data.qmd
         text: Data & sources
+      - text: Learn
+        menu:
+          - href: reasoning.qmd
+            text: Question & reasoning
+          - href: glossary.qmd
+            text: Glossary
+          - href: build-guide.qmd
+            text: Annotated build guide
+          - href: tools.qmd
+            text: Free software choices
     right:
       - icon: github
         href: https://github.com/TheThunda01/colombia-dengue-atlas
         aria-label: Source repository
   page-footer:
-    left: "Brandon Huynh · Colombia Dengue Surveillance Atlas · v1.0"
+    left: "Brandon Huynh · Colombia Dengue Surveillance Atlas · v1.1"
     right: "Historical surveillance, 2019–2022 · Not a real-time risk forecast"
   search: false
 format:
@@ -38,6 +50,8 @@ format:
     anchor-sections: false
     lang: en
     pagetitle: "{{< meta title >}} | Colombia Dengue Atlas"
+filters:
+  - doc-links.lua
 execute:
   echo: false
   warning: false

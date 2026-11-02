@@ -1,0 +1,7 @@
+---
+strip-doc-title: true
+title: "Choosing free visualization software"
+toc: true
+---
+
+{{< include ../docs/visualization-tools.md >}}
