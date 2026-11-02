@@ -8,6 +8,7 @@ import {
   selectedRows,
   summaries,
   mapSummaries,
+  rateScaleMaximum,
   timeSeries,
   csv,
 } from "../site/assets/model.mjs";
@@ -17,6 +18,27 @@ import {
 const root = new URL("../", import.meta.url);
 const read = (path) => JSON.parse(readFileSync(new URL(path, root), "utf8"));
 const data = read("site/data/atlas.json");
+test("fixed rate domains bound all annual and partial-period values without changing source data", () => {
+  for (const event of ["210", "220"]) {
+    const maximum = rateScaleMaximum(data, event);
+    const annual = summaries(data, { ...defaults, event }, true);
+    assert.equal(
+      maximum,
+      Math.max(...annual.map((r) => r.cases_per_100k ?? 0)),
+    );
+    for (const start of [2019, 2020, 2021, 2022]) {
+      for (const first of [1, 26, 53]) {
+        const map = mapSummaries(data, { ...defaults, event, start, first });
+        assert.ok(
+          map.every(
+            (r) => r.rate === null || (r.rate >= 0 && r.rate <= maximum),
+          ),
+        );
+        assert.equal(map.find((r) => r.code === "11").rate, null);
+      }
+    }
+  }
+});
 const raw = [2019, 2020, 2021, 2022].flatMap((y) =>
   read(`data/raw/ins_dengue_${y}.json`),
 );

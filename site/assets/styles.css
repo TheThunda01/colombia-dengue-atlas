@@ -605,3 +605,62 @@ body:has(.hero) #title-block-header {
 .content code {
   overflow-wrap: anywhere;
 }
+
+/* Quantitative legends and a persistent alternative to hover-only map values. */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+.legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legend-key svg {
+  flex-shrink: 0;
+}
+.missing-swatch {
+  background: repeating-linear-gradient(
+    135deg,
+    #e5e6e4,
+    #e5e6e4 3px,
+    #919b98 4px
+  );
+}
+.rate-legend {
+  width: min(100%, 280px);
+}
+.rate-gradient {
+  height: 12px;
+  background: linear-gradient(90deg, #e5f1ed, #166b70);
+}
+.legend-endpoints {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+.legend-note {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #52666d;
+}
+.map-detail {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid #166b70;
+  padding: 12px 16px;
+  margin-top: 20px;
+  background: #f1f6f3;
+  font-size: 0.9rem;
+}
+.map-detail strong {
+  font-size: 1rem;
+}
+.map-detail span:last-child {
+  color: #52666d;
+  font-size: 0.82rem;
+}

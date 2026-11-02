@@ -7,6 +7,7 @@
   "atlas_bytes": 3296220,
   "inputs": {
     "departments.geojson": "8a9b8cdcfb8373bf5f38b9360fb32cbdcd03de2b3396fd890ae1766f9fb46b12",
+    "map_comparison.csv": "e95ca72cb59876fde202763fdb726a1d10877666149052686b864eb79899d7a3",
     "population.csv": "ba2fcec7fcd6af6bf117b6de7a532fa914b0713cbd7c2cb3bf1c650c6f245b1e",
     "surveillance_audit.json": "ea310b4a7092e34525a56df61ac665fe91596eaafcedddd05fee52829c22cf16",
     "surveillance_weekly.csv": "72c24ba46272ca5a5b162351e6229ef71144cde88d162903a6be4f7534ded4b4",

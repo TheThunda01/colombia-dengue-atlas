@@ -13,3 +13,13 @@ Audit date: **2 November 2026**. This audit checks whether project claims have a
 | Underlying date basis and clinical confirmation | **Unresolved at record level.** Neither onset-date assignment nor universal laboratory confirmation is asserted. |
 
 Dataset citations remain separate from the software citation and MIT code license. No institutional logo or claim of endorsement is used. The limited [search log](search-log.json) records actual PAHO/source-feasibility searches; it is not an exhaustive project retrieval log.
+
+## Visualization and teaching update
+
+The [free software guide](visualization-tools.md) records official licensing and
+capability sources checked on 2 November 2026. Inkscape 1.4.4 and Blender 5.2.3 LTS
+were queried locally for their version; only Inkscape was used to export the new
+figure. QGIS and ParaView are evaluated options, not claimed production steps.
+The build guide's Antioquia 2019 example was run against the committed model:
+4,980 recorded cases / 6,518,070 residents × 100,000 = 76.4029843, with 52/52 source
+week cells present. This is a calculation check, not evidence of complete capture.

@@ -1,0 +1,6 @@
+---
+strip-doc-title: true
+title: "Glossary"
+---
+
+{{< include ../docs/glossary.md >}}

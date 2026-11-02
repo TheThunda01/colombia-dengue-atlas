@@ -6,8 +6,8 @@ in Colombia, 2019–2022.
 Repository: [TheThunda01/colombia-dengue-atlas](https://github.com/TheThunda01/colombia-dengue-atlas)
 · Live website:
 [Colombia Dengue Surveillance Atlas](https://thethunda01.github.io/colombia-dengue-atlas/).
-Published and checked on 2 November 2026. See the [release report](RELEASE_REPORT.md)
-for hosted build, data, and browser verification evidence.
+Updated for **v1.1.0** on 2 November 2026. Read the [visual and guide update](reports/visual-guide-review-2026-11-02.md)
+and the preserved [first-release report](RELEASE_REPORT.md) for verification scope.
 
 ## Why this project
 
@@ -15,6 +15,10 @@ Reported case counts describe a surveillance system as well as a disease. This
 atlas helps researchers, students, and public health readers compare Colombian
 departments while seeing the source, geographic definitions, missing observations,
 and population denominator behind each view.
+
+Start with the [question and reasoning](docs/project-context.md), then the
+[dengue and surveillance concepts](docs/biology-and-concepts.md). The
+[annotated build guide](docs/build-guide.md) follows one value from source to screen.
 
 Within [From biological measurements to better experiments](https://github.com/TheThunda01/TheThunda01/blob/main/PROJECT_GUIDE.md),
 this project demonstrates spatial data preparation and evidence-aware scientific
@@ -32,8 +36,10 @@ with the portfolio's molecular or experimental projects.
 - Downloads the current summary with identifiers, units, source metadata, and
   denominator information. Available normalization is **reported cases per
   100,000 total population**, not official incidence per population at risk.
-- Runs entirely as a static Quarto website. Python prepares aggregates and an
-  exported figure; browser JavaScript supplies linked interactions without a
+- Adds a four-year map plate with one shared color scale, editable SVG,
+  Inkscape PNG/PDF exports, and a complete 132-row companion table.
+- Runs entirely as a static Quarto website. Python prepares aggregates and publication
+  figures; browser JavaScript supplies linked interactions without a
   running Python service or paid map provider.
 
 The source is INS's licensed aggregate dataset `4hyg-wa9d`, using 2019–2022;
@@ -53,8 +59,10 @@ uv run python scripts/build.py
 uv run python scripts/site.py preview
 ```
 
-The build writes `site/_site/index.html`, the website's supporting assets, and
-`figures/weekly-comparison.svg` plus `figures/weekly-comparison.png`. The preview
+The build writes `site/_site/index.html`, supporting assets, and the weekly figure.
+It verifies and reuses the committed `figures/map-comparison.svg`, PNG, and PDF
+against their recorded input, renderer, and output fingerprints. Inkscape is
+needed only when refreshing that artwork; see the [free software guide](docs/visualization-tools.md). The preview
 command serves http://127.0.0.1:4200/. Use that server for browser interactions;
 opening the HTML directly with a `file:` URL can prevent data loading.
 
@@ -76,6 +84,11 @@ After excluding foreign and unknown origin from the department map, the sums of
 published dengue event-210 observations are **122,992 (2019), 76,220 (2020),
 49,174 (2021), and 65,428 (2022)**. These are snapshot-specific sums, not estimates
 of all infections or proof that every municipality reported.
+
+![Four annual maps on a shared scale](figures/map-comparison.png)
+
+[Download the editable SVG](figures/map-comparison.svg) · [Vector PDF](figures/map-comparison.pdf) ·
+[132 department-year values](data/processed/map_comparison.csv)
 
 ![Desktop atlas](docs/screenshots/desktop.png)
 
@@ -125,18 +138,22 @@ Three decisions worth being able to explain:
 
 ## Documentation
 
-- [Methods and interpretation](docs/methods.md)
-- [Source register, retrieval, and deliberate refresh](docs/sources.md)
-- [INS definitions, district rollups, validation, and data dictionary](docs/ins-source.md)
-- [DANE denominators, map processing, and terms](docs/dane-source.md)
-- [PAHO source assessment and remaining comparability questions](docs/paho-source-assessment.md)
-- [Interface design and inspection criteria](docs/design.md)
-- [Practical use and worked example](docs/practical-use.md)
-- [Data dictionary](docs/data-dictionary.md), [glossary](docs/glossary.md), and [assumption register](docs/assumptions.md)
-- [Focused source review](docs/literature-review.md), [search log](docs/search-log.json), and [reference audit](docs/reference-audit.md)
-- [Dated corrections](docs/corrections-2026-11-02.md) and [release validation](RELEASE_REPORT.md)
-- [Geography validation evidence](reports/geography_validation.json)
-- [Data reuse terms](DATA_LICENSE.md) and [software citation](CITATION.cff)
+Read from the question toward the implementation, or jump to the stage you need.
+
+| Reading order | Guide | What it helps you understand |
+| --- | --- | --- |
+| 1. Frame the question | [Project context and reasoning](docs/project-context.md) | Why these sources, these years, and these visual encodings. |
+| 2. Learn the concepts | [Dengue and surveillance concepts](docs/biology-and-concepts.md) · [Glossary](docs/glossary.md) | Recorded cases, absent rows, denominators, and map terminology. |
+| 3. Try an example | [Practical use](docs/practical-use.md) · [Live explorer](https://thethunda01.github.io/colombia-dengue-atlas/explore.html) | Follow a selection through the views and downloads. |
+| 4. Inspect the calculation | [Methods](docs/methods.md) · [Data dictionary](docs/data-dictionary.md) · [Assumptions](docs/assumptions.md) | Exact definitions, formulas, units, and unresolved limitations. |
+| 5. Follow the evidence | [Source register](docs/sources.md) · [INS](docs/ins-source.md) · [DANE](docs/dane-source.md) · [PAHO assessment](docs/paho-source-assessment.md) | Retrieval, versions, geographic rollups, and reuse terms. |
+| 6. Build and adapt it | [Annotated build guide](docs/build-guide.md) · [Free software choices](docs/visualization-tools.md) · [Design notes](docs/design.md) | Commented code, reproducible commands, and when Blender or QGIS would help. |
+| 7. Check the release | [v1.1 review](reports/visual-guide-review-2026-11-02.md) · [First release](RELEASE_REPORT.md) · [Correction log](docs/corrections-2026-11-02.md) | What was actually tested and what those checks establish. |
+
+The [focused source review](docs/literature-review.md), [search log](docs/search-log.json),
+[reference audit](docs/reference-audit.md), [geography validation](reports/geography_validation.json),
+and [figure provenance](reports/cartographic_plate.json) preserve the deeper evidence.
+[Data reuse terms](DATA_LICENSE.md) and [software citation](CITATION.cff) stay separate.
 
 ## Development and reuse
 

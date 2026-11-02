@@ -26,3 +26,25 @@ The atlas should make one defensible descriptive comparison at a time. The selec
 ## Release inspection
 
 Inspect desktop and narrow layouts using the actual rendered static site. Exercise every filter, keyboard selection, reset, download, zero/missing handling, and empty state. Test project-relative links and data fetches at the deployed GitHub Pages URL as well as locally. Do not describe unperformed visual checks as passed.
+
+## Visual refinement in v1.1
+
+The explorer now uses a fixed event-specific color domain across all four years.
+Count symbols retain an adaptive size domain with direct numeric labels and an
+explicit rescaling note. Hatching has its own legend swatch; Bogotá's unavailable
+status is named even when its small polygon is hard to see. A persistent detail
+panel pairs the selected unit's value with its present/expected week cells.
+Keyboard selection restores focus to the replaced map or ranking control.
+Narrow-screen timeline ticks show years, with exact weeks still in tooltips and CSV.
+
+The publication map plate uses four equal-size maps with identical extents and a
+shared linear 0–2,500 scale. Map and color scale remain two-dimensional. Inkscape
+converts the generated vector artwork to PNG/PDF; no case values, geometry, or
+rates are edited by hand. The separate [software guide](visualization-tools.md)
+explains free-tool choices and the reasons to reserve Blender for a future scene
+with meaningful three-dimensional information.
+
+The site reading path is Overview → Explore/Figures → Methods/Data → Learn.
+The Learn menu brings together reasoning, glossary, annotated code, and tool
+choices. The README follows the same seven-section portfolio outline as the
+other projects and adds a guide/purpose table for deeper reading.

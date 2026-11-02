@@ -1,6 +1,6 @@
 [project]
 name = "colombia-dengue-atlas"
-version = "1.0.0"
+version = "1.1.0"
 description = "Reproducible departmental dengue surveillance atlas for Colombia"
 requires-python = ">=3.12,<3.13"
 authors = [{name = "Brandon Huynh"}]

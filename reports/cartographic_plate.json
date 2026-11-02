@@ -1,0 +1,94 @@
+{
+  "projection": "EPSG:9377",
+  "color_scale": {
+    "type": "linear",
+    "min": 0.0,
+    "max": 2500.0,
+    "shared_across_panels": true
+  },
+  "panels": [
+    {
+      "year": 2019,
+      "mapped_units": 33,
+      "cases": 122992,
+      "available_department_weeks": 1593,
+      "expected_department_weeks": 1716,
+      "units_with_partial_source_weeks": 7,
+      "units_with_no_source_rows": 1,
+      "color_vmin": 0.0,
+      "color_vmax": 2500.0
+    },
+    {
+      "year": 2020,
+      "mapped_units": 33,
+      "cases": 76220,
+      "available_department_weeks": 1552,
+      "expected_department_weeks": 1749,
+      "units_with_partial_source_weeks": 11,
+      "units_with_no_source_rows": 1,
+      "color_vmin": 0.0,
+      "color_vmax": 2500.0
+    },
+    {
+      "year": 2021,
+      "mapped_units": 33,
+      "cases": 49174,
+      "available_department_weeks": 1502,
+      "expected_department_weeks": 1716,
+      "units_with_partial_source_weeks": 11,
+      "units_with_no_source_rows": 1,
+      "color_vmin": 0.0,
+      "color_vmax": 2500.0
+    },
+    {
+      "year": 2022,
+      "mapped_units": 33,
+      "cases": 65428,
+      "available_department_weeks": 1531,
+      "expected_department_weeks": 1716,
+      "units_with_partial_source_weeks": 10,
+      "units_with_no_source_rows": 1,
+      "color_vmin": 0.0,
+      "color_vmax": 2500.0
+    }
+  ],
+  "event_code": "210",
+  "years": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "table_rows": 132,
+  "null_case_and_rate_rows": 4,
+  "semantics": "Available source rows only; absent cells are not zeros; row presence is not reporting completeness.",
+  "inputs_sha256": {
+    "surveillance_weekly.csv": "72c24ba46272ca5a5b162351e6229ef71144cde88d162903a6be4f7534ded4b4",
+    "population.csv": "ba2fcec7fcd6af6bf117b6de7a532fa914b0713cbd7c2cb3bf1c650c6f245b1e",
+    "departments.geojson": "8a9b8cdcfb8373bf5f38b9360fb32cbdcd03de2b3396fd890ae1766f9fb46b12",
+    "surveillance_audit.json": "ea310b4a7092e34525a56df61ac665fe91596eaafcedddd05fee52829c22cf16"
+  },
+  "build_fingerprint": {
+    "algorithm": "sha256-lf-text-v1",
+    "files_sha256": {
+      "data/processed/surveillance_weekly.csv": "72c24ba46272ca5a5b162351e6229ef71144cde88d162903a6be4f7534ded4b4",
+      "data/processed/population.csv": "9e20df387c69c539f79bd6f245b36cdd15588b9088929920fab53930cb457ef8",
+      "data/processed/departments.geojson": "12e47ef9e4dffce6838ea0658fcdbe0987163369302cfe1ac1b0857ef1e7df04",
+      "data/processed/surveillance_audit.json": "2d1e83cf9eb389850cc6850e5c3570a2e162daf07ae93b73c48f74b337f42756",
+      "scripts/cartographic_plate.py": "a1890587dc5c30bd064f6ef5dcf0c9d70fb5aea40f109a476c1d474a9fe87463",
+      "uv.lock": "d98a6512fe84317262b8f719e5c92489394c39aff9c8c4ec27b974aac767ced0"
+    },
+    "sha256": "b83766fa21d2050c7237fcf811c30aa438acba17bb6ca3ffa4052e9d31f45ae9"
+  },
+  "svg_sha256": "0dfdee8a34c4d3f8933c91997bc72dacc57398a35331e5c72f98c2d3af8d71e2",
+  "csv_sha256": "e95ca72cb59876fde202763fdb726a1d10877666149052686b864eb79899d7a3",
+  "inkscape_export": {
+    "version": "Inkscape 1.4.4 (dcaf3e7, 2026-05-05)",
+    "source_svg_sha256": "0dfdee8a34c4d3f8933c91997bc72dacc57398a35331e5c72f98c2d3af8d71e2",
+    "png_dpi": 240,
+    "files_sha256": {
+      "map-comparison.png": "4e04dcef579818c15255f4ceb9cee1f143df2c2d23a7d18f2fbba5f28684aadd",
+      "map-comparison.pdf": "9a55813c72c8f599bc888b9991165143ef980b974706bde6d242cb76ea29abcf"
+    }
+  }
+}
