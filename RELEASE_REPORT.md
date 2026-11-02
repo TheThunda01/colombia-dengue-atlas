@@ -6,8 +6,8 @@ Repository: https://github.com/TheThunda01/colombia-dengue-atlas
 
 Website: https://thethunda01.github.io/colombia-dengue-atlas/
 
-Publication verification is recorded below once the hosted run and live checks
-finish. A local build is not evidence of a successful deployment.
+Published and verified at the website URL above. Hosted and live evidence is
+recorded below separately from local checks.
 
 ## Completed local release checks
 
@@ -84,4 +84,25 @@ inspect numerical and definition changes, and repeat release checks.
 
 ## Hosted publication
 
-Pending initial repository publication and hosted verification.
+Initial publication commit: `ae1db9ac1fff9ba520aa8343dd834a9e546de618`.
+
+[Hosted Linux validation and Pages deployment](https://github.com/TheThunda01/colombia-dengue-atlas/actions/runs/41462044172)
+completed successfully. The independent GitHub dependency-graph run also passed.
+
+All 11 browser scenario groups passed at the actual project-relative GitHub Pages
+URL, with zero page errors and zero HTTP errors (`reports/browser_live.json`).
+The browser retrieved the real deployed data and exercised both CSV downloads.
+No CDN, paid service, server-side Python process, or credentials are needed by
+site visitors. The final release tag follows the documentation and formatting
+follow-up; its exact commit and final successful workflow are recorded in the
+GitHub release body.
+
+A managed-certificate error in Playwright's Node-side link checker was resolved
+by using the system CA store; certificate verification remained enabled. The
+actual Edge browser loaded the site successfully before and after this test-
+runtime adjustment. The project environment setup used the same system-trust
+approach with uv.
+
+The publication figure uses fixed metadata dates and SVG identifiers. Repeated
+exports in the same recorded environment were byte-identical for SVG, PNG and
+PDF. Cross-platform font/rendering differences can still change artifact bytes.

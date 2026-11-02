@@ -5,22 +5,27 @@ import csv
 from datetime import datetime, timezone
 import io
 import json
+import os
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
+# Use the operating system CA store for Playwright's Node-side link requests.
+# Certificate verification remains enabled (also works behind managed proxies).
+os.environ.setdefault('NODE_USE_SYSTEM_CA','1')
 
 
-def run(url: str, channel: str|None, report_name: str) -> None:
+def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=None) -> None:
     url=url.rstrip('/')+'/'
     class Checks(list):
         def append(self, item):
             print('PASS: '+item, flush=True)
             super().append(item)
     checks=Checks();errors=[];failed=[]
-    screenshots=ROOT/'docs/screenshots';screenshots.mkdir(parents=True,exist_ok=True)
+    screenshots=Path(screenshot_dir) if screenshot_dir else ROOT/'docs/screenshots'
+    screenshots.mkdir(parents=True,exist_ok=True)
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True,**({'channel':channel} if channel else {}))
         context=browser.new_context(viewport={'width':1440,'height':1000},device_scale_factor=1,accept_downloads=True,reduced_motion='reduce')
@@ -145,4 +150,5 @@ if __name__=='__main__':
     parser.add_argument('--url',default='http://127.0.0.1:4200/')
     parser.add_argument('--channel',default='msedge')
     parser.add_argument('--report',default='browser_local.json')
-    args=parser.parse_args();run(args.url,None if args.channel=='chromium' else args.channel,args.report)
+    parser.add_argument('--screenshots-dir',default=None)
+    args=parser.parse_args();run(args.url,None if args.channel=='chromium' else args.channel,args.report,args.screenshots_dir)

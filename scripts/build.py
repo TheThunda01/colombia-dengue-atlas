@@ -6,6 +6,7 @@ only with their pinned checksums. The default uses committed processed data.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -79,7 +80,7 @@ def bundle() -> dict:
 def figure(payload: dict) -> None:
     frame=pd.DataFrame(payload['rows']);frame=frame[frame.event_code=='210']
     grouped=frame.groupby(['year','week']).cases.sum(min_count=1)
-    plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'svg.fonttype':'none',
+    plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'svg.fonttype':'none','svg.hashsalt':'colombia-dengue-atlas-v1',
                          'axes.spines.top':False,'axes.spines.right':False})
     fig,axes=plt.subplots(2,2,figsize=(11,6.8),sharex=True,sharey=True)
     colors=['#166b70','#bd632b','#69509b','#3b677f']
@@ -102,7 +103,12 @@ def figure(payload: dict) -> None:
     fig.subplots_adjust(left=.08,right=.98,bottom=.23,top=.84,hspace=.38,wspace=.18)
     for ext in ['svg','png','pdf']:
         destination=ROOT/f'figures/weekly-comparison.{ext}'
-        fig.savefig(destination,dpi=300,facecolor='white',metadata={'Creator':'Brandon Huynh; Colombia Dengue Surveillance Atlas'})
+        metadata={'Creator':'Brandon Huynh; Colombia Dengue Surveillance Atlas'}
+        if ext=='svg':metadata['Date']=payload['meta']['snapshot_date']
+        if ext=='pdf':
+            timestamp=datetime.fromisoformat(payload['meta']['snapshot_date']).replace(tzinfo=timezone.utc)
+            metadata.update(CreationDate=timestamp,ModDate=timestamp)
+        fig.savefig(destination,dpi=300,facecolor='white',metadata=metadata)
     plt.close(fig)
     (ROOT/'site/figures').mkdir(exist_ok=True)
     for file in (ROOT/'figures').glob('weekly-comparison.*'):

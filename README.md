@@ -4,10 +4,10 @@
 in Colombia, 2019–2022.
 
 Repository: [TheThunda01/colombia-dengue-atlas](https://github.com/TheThunda01/colombia-dengue-atlas)
-· Website publication target:
+· Live website:
 [Colombia Dengue Surveillance Atlas](https://thethunda01.github.io/colombia-dengue-atlas/).
-These are the configured publication addresses; deployment verification is recorded
-separately from the local build.
+Published and checked on 2 November 2026. See the [release report](RELEASE_REPORT.md)
+for hosted build, data, and browser verification evidence.
 
 ## Why this project
 
@@ -48,7 +48,7 @@ versions are locked in `uv.lock`; use the project environment for every command.
 From the repository root:
 
 ```powershell
-uv sync --frozen
+uv sync --frozen --system-certs
 uv run python scripts/build.py
 uv run python scripts/site.py preview
 ```
