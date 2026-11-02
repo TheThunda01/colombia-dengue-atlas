@@ -1,0 +1,34 @@
+{
+  "population_rows": 132,
+  "department_units": 33,
+  "years": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "unmatched_population_codes": [],
+  "unmatched_boundary_codes": [],
+  "population_missing_values": 0,
+  "population_nonpositive_values": 0,
+  "national_population_sums": {
+    "2019": 49266526,
+    "2020": 50390790,
+    "2021": 51115637,
+    "2022": 51643565
+  },
+  "boundary_source_version": "MGN2025",
+  "boundary_feature_update_years": [
+    2024,
+    2025
+  ],
+  "boundary_source_valid": true,
+  "boundary_output_valid": true,
+  "geometry_vertices_original": 1079179,
+  "geometry_vertices_simplified": 14492,
+  "simplification_tolerance_m": 500,
+  "simplification_crs": "EPSG:9377",
+  "output_crs": "EPSG:4326",
+  "source_retrieved_date": "2026-11-02",
+  "limits": "Display boundaries are fixed MGN2025, not reconstructed annual historical boundaries. No polygon overlay assigns cases. Total-population rates are not INS population-at-risk incidence."
+}

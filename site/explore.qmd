@@ -1,0 +1,31 @@
+---
+title: "Explore the atlas"
+title-block-style: none
+page-layout: full
+---
+
+```{=html}
+<div class="explore-head"><div><p class="eyebrow">THE EXPLORER · INS / SIVIGILA</p><h1>Place the numbers in context.</h1><p>Compare recorded cases across geography and time. Every view follows your selection.</p></div><a href="methods.html" class="text-link">How to read these data ↗</a></div>
+<noscript><p class="notice">Enable JavaScript for coordinated filters. Static figures and full CSV downloads are available on the Data & sources page.</p></noscript>
+<div id="app-error" class="notice" role="alert" hidden></div>
+<div id="atlas" aria-busy="true">
+<form id="filters" class="filters" aria-label="Atlas filters">
+ <label>Geographic focus<select id="department"><option value="all">All departments</option></select></label>
+ <label>INS event<select id="event"><option value="210">Dengue · 210</option><option value="220">Severe dengue · 220</option></select></label>
+ <label>From year<select id="year-start"></select></label>
+ <label>Through year<select id="year-end"></select></label>
+ <label>Map measure<select id="metric"><option value="cases">Recorded cases</option><option value="rate">Per 100,000 residents</option></select></label>
+ <button type="button" id="reset" class="secondary-button">Reset</button>
+ <details class="week-options"><summary>Limit epidemiological weeks</summary><div class="week-fields"><label>First week<input id="week-start" type="number" min="1" max="53" value="1"></label><label>Last week<input id="week-end" type="number" min="1" max="53" value="53"></label></div><p>Week 53 exists only in 2020. Years and weeks follow the source labels.</p></details>
+</form>
+<p id="selection" class="selection" aria-live="polite">Loading the pinned historical snapshot…</p>
+<div class="kpis"><div><span class="kpi-label">Recorded cases in selection</span><strong id="kpi-cases">—</strong><span id="kpi-event"></span></div><div><span class="kpi-label">Department-week cells with source rows</span><strong id="kpi-availability">—</strong><span>Row availability; not reporting completeness</span></div><div><span class="kpi-label">Historical snapshot</span><strong>2019–2022</strong><span id="snapshot-date">Retrieved 2 November 2026</span></div></div>
+<p id="scope-note" class="notice"></p>
+<div class="map-layout"><section class="map-panel" aria-labelledby="map-title"><div class="panel-heading"><span class="figure-number">01 / GEOGRAPHY</span><h2 id="map-title">Where cases were recorded</h2></div><p id="map-subtitle" class="chart-description"></p><div id="map-container"></div><div id="map-legend" class="map-legend"></div><p class="source-note">DANE administrative boundaries, generalized for display. Click or keyboard-select a department to focus the other views.</p></section><section class="ranking-panel" aria-labelledby="rank-title"><span class="figure-number">READ THE MAP</span><h2 id="rank-title">Department comparison</h2><p id="rank-description"></p><div id="rank-table"></div><p class="source-note">The map and ranking retain geographic context; the highlighted department is the focus of the timeline and download.</p></section></div>
+<section class="chart-section" aria-labelledby="time-title"><div class="panel-heading"><span class="figure-number">02 / THROUGH TIME</span><h2 id="time-title">Weekly recorded cases</h2></div><p id="time-description" class="chart-description"></p><div id="timeline" class="plot" role="img" aria-label="Weekly recorded cases for the current selection"></div><p class="source-note">Each point is a weekly count, not a cumulative total. Gaps remain gaps; for combined departments, partial weekly sums are marked.</p></section>
+<section class="chart-section" aria-labelledby="season-title"><div class="panel-heading"><span class="figure-number">03 / ACROSS YEARS</span><h2 id="season-title">Compare the same epidemiological weeks</h2></div><p id="season-description" class="chart-description"></p><div id="seasonal" class="plot" role="img" aria-label="Seasonal comparison of weekly recorded cases"></div><p class="source-note">A shared linear scale starts at zero. Week 53 is shown only for 2020; no calendar dates or onset dates are inferred.</p></section>
+<section class="chart-section" aria-labelledby="table-title"><div class="table-heading"><div><span class="figure-number">04 / TRACE & DOWNLOAD</span><h2 id="table-title">The values behind the views</h2></div><div class="download-actions"><button id="download" type="button">Download summary CSV</button><button id="download-weekly" type="button" class="secondary-button">Weekly values CSV</button></div></div><p id="table-description"></p><div id="summary-table" class="table-scroll" tabindex="0" aria-label="Filtered annual summary table"></div><details class="provenance"><summary>Source, coverage, and interpretation</summary><div id="provenance-content"></div><p><a href="data.html">Complete source register & data dictionary</a> · <a href="methods.html">Definitions & calculation methods</a></p></details></section>
+</div>
+<script src="assets/plotly.min.js"></script>
+<script type="module" src="assets/atlas.js"></script>
+```

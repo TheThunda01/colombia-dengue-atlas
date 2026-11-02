@@ -1,0 +1,438 @@
+{
+  "source_id": "ins-socrata-4hyg-wa9d",
+  "snapshot_date": "2026-11-02",
+  "source_title": "Datos de Vigilancia en Salud Pública de Colombia",
+  "source_organization": "Instituto Nacional de Salud - INS, Bogotá D.C.",
+  "source_url": "https://www.datos.gov.co/d/4hyg-wa9d",
+  "source_data_updated_utc": "2024-10-17T23:35:37+00:00",
+  "license": "CC-BY-SA-4.0",
+  "years": [
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "epidemiological_weeks_by_year": {
+    "2019": 52,
+    "2020": 53,
+    "2021": 52,
+    "2022": 52
+  },
+  "geographic_units": 33,
+  "raw_municipal_week_event_rows": 57083,
+  "explicit_zero_source_rows": 0,
+  "duplicate_municipal_keys": 0,
+  "unmatched_department_codes": 0,
+  "independently_verified_week_event_geography_sums": 8358,
+  "output_rows": 13794,
+  "observation_status_counts": {
+    "observed_positive": 8130,
+    "source_absent": 5664
+  },
+  "annual_audit": [
+    {
+      "year": 2019,
+      "event_code": "210",
+      "mapped_cases": 122992,
+      "source_department_week_rows": 1593,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 643,
+      "excluded_unknown_geography_cases": 6
+    },
+    {
+      "year": 2019,
+      "event_code": "220",
+      "mapped_cases": 1339,
+      "source_department_week_rows": 576,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 9,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2020,
+      "event_code": "210",
+      "mapped_cases": 76220,
+      "source_department_week_rows": 1552,
+      "expected_department_week_cells": 1749,
+      "excluded_foreign_cases": 199,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2020,
+      "event_code": "220",
+      "mapped_cases": 860,
+      "source_department_week_rows": 398,
+      "expected_department_week_cells": 1749,
+      "excluded_foreign_cases": 2,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2021,
+      "event_code": "210",
+      "mapped_cases": 49174,
+      "source_department_week_rows": 1502,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 151,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2021,
+      "event_code": "220",
+      "mapped_cases": 932,
+      "source_department_week_rows": 407,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 8,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2022,
+      "event_code": "210",
+      "mapped_cases": 65428,
+      "source_department_week_rows": 1531,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 263,
+      "excluded_unknown_geography_cases": 0
+    },
+    {
+      "year": 2022,
+      "event_code": "220",
+      "mapped_cases": 1330,
+      "source_department_week_rows": 571,
+      "expected_department_week_cells": 1716,
+      "excluded_foreign_cases": 10,
+      "excluded_unknown_geography_cases": 0
+    }
+  ],
+  "district_audit": [
+    {
+      "year": 2019,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "210",
+      "cases": 1874
+    },
+    {
+      "year": 2019,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "220",
+      "cases": 26
+    },
+    {
+      "year": 2019,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "210",
+      "cases": 1798
+    },
+    {
+      "year": 2019,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "220",
+      "cases": 42
+    },
+    {
+      "year": 2019,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "210",
+      "cases": 678
+    },
+    {
+      "year": 2019,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "220",
+      "cases": 18
+    },
+    {
+      "year": 2019,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 3867
+    },
+    {
+      "year": 2019,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 40
+    },
+    {
+      "year": 2019,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 102
+    },
+    {
+      "year": 2019,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 3
+    },
+    {
+      "year": 2020,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "210",
+      "cases": 1340
+    },
+    {
+      "year": 2020,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "220",
+      "cases": 21
+    },
+    {
+      "year": 2020,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "210",
+      "cases": 1095
+    },
+    {
+      "year": 2020,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "220",
+      "cases": 34
+    },
+    {
+      "year": 2020,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "210",
+      "cases": 437
+    },
+    {
+      "year": 2020,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "220",
+      "cases": 39
+    },
+    {
+      "year": 2020,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 13230
+    },
+    {
+      "year": 2020,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 143
+    },
+    {
+      "year": 2020,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 222
+    },
+    {
+      "year": 2020,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 3
+    },
+    {
+      "year": 2021,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "210",
+      "cases": 4563
+    },
+    {
+      "year": 2021,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "220",
+      "cases": 116
+    },
+    {
+      "year": 2021,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "210",
+      "cases": 6527
+    },
+    {
+      "year": 2021,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "220",
+      "cases": 176
+    },
+    {
+      "year": 2021,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "210",
+      "cases": 909
+    },
+    {
+      "year": 2021,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "220",
+      "cases": 26
+    },
+    {
+      "year": 2021,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 5724
+    },
+    {
+      "year": 2021,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 64
+    },
+    {
+      "year": 2021,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 384
+    },
+    {
+      "year": 2021,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 3
+    },
+    {
+      "year": 2022,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "210",
+      "cases": 6094
+    },
+    {
+      "year": 2022,
+      "municipality_code": "08001",
+      "district": "Barranquilla",
+      "department_code": "08",
+      "event_code": "220",
+      "cases": 130
+    },
+    {
+      "year": 2022,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "210",
+      "cases": 3132
+    },
+    {
+      "year": 2022,
+      "municipality_code": "13001",
+      "district": "Cartagena",
+      "department_code": "13",
+      "event_code": "220",
+      "cases": 71
+    },
+    {
+      "year": 2022,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "210",
+      "cases": 509
+    },
+    {
+      "year": 2022,
+      "municipality_code": "47001",
+      "district": "Santa Marta",
+      "department_code": "47",
+      "event_code": "220",
+      "cases": 8
+    },
+    {
+      "year": 2022,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 2821
+    },
+    {
+      "year": 2022,
+      "municipality_code": "76001",
+      "district": "Cali",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 38
+    },
+    {
+      "year": 2022,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "210",
+      "cases": 340
+    },
+    {
+      "year": 2022,
+      "municipality_code": "76109",
+      "district": "Buenaventura",
+      "department_code": "76",
+      "event_code": "220",
+      "cases": 1
+    }
+  ],
+  "missingness": "Absent source cells remain null. Row presence is not a reporting-completeness measure.",
+  "date_basis": "Source epidemiological year and week; underlying onset-versus-notification date basis is not established by this aggregate dataset's metadata.",
+  "case_basis": "Event 210 and event 220 are separate published surveillance categories, not combined. Routine portal describes confirmed-as-notified cases; laboratory confirmation is not supplied.",
+  "geography_basis": "Municipality/department of occurrence or procedence, not reporting office or proven residence. Five separately reported districts already carry parent department codes and are included once.",
+  "limits": [
+    "No person-level de-duplication is possible from these aggregates.",
+    "Source snapshots and annual event reports can disagree after different revisions or case cleaning.",
+    "Bogotá has no selected-event rows; missing is not evidence of zero disease.",
+    "Calendar years are fully elapsed; this does not establish surveillance capture completeness."
+  ]
+}

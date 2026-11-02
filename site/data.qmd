@@ -1,0 +1,59 @@
+---
+title: "Data, coverage & sources"
+toc: true
+---
+
+## Download the pinned release data
+
+[Weekly department/event panel (CSV)](data/surveillance_weekly.csv) ·
+[Annual populations (CSV)](data/population.csv) ·
+[Display boundaries (GeoJSON)](data/departments.geojson) ·
+[Full surveillance audit (JSON)](data/surveillance_audit.json)
+
+For a filtered download, use the [explorer](explore.qmd). These full-panel
+downloads retain missing cells; they are not a complete case-capture claim.
+
+Tables scroll horizontally on narrow screens.
+
+## Snapshot checks
+
+```{python}
+#| label: snapshot-table
+#| output: asis
+import json
+from pathlib import Path
+from IPython.display import Markdown, display
+snapshot = json.loads(Path('data/atlas.json').read_text(encoding='utf-8'))
+rows = snapshot['rows']
+lines = ['|Year|Dengue (210), recorded cases|Severe dengue (220), recorded cases|Weeks|',
+         '|---|---:|---:|---:|']
+for year in [2019, 2020, 2021, 2022]:
+    totals = [sum(r['cases'] or 0 for r in rows if r['year']==year and r['event_code']==event) for event in ['210','220']]
+    lines.append(f'|{year}|{totals[0]:,}|{totals[1]:,}|{53 if year==2020 else 52}|')
+display(Markdown('\n'.join(lines)))
+```
+
+Counts above sum the mapped department records. Foreign and unknown geography
+are excluded; Bogotá has no source rows. Event categories remain separate.
+
+## Source register
+
+{{< include ../docs/sources.md >}}
+
+## Field definitions
+
+{{< include ../docs/data-dictionary.md >}}
+
+## Source-specific inspection notes
+
+### INS surveillance
+
+{{< include ../docs/ins-source.md >}}
+
+### DANE population and boundaries
+
+{{< include ../docs/dane-source.md >}}
+
+### PAHO feasibility assessment
+
+{{< include ../docs/paho-source-assessment.md >}}

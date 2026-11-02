@@ -1,0 +1,45 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - assets/
+    - data/
+    - figures/
+website:
+  title: "Colombia Dengue Atlas"
+  favicon: assets/favicon.svg
+  site-url: https://thethunda01.github.io/colombia-dengue-atlas/
+  repo-url: https://github.com/TheThunda01/colombia-dengue-atlas
+  navbar:
+    background: "#102f39"
+    foreground: "#ffffff"
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: explore.qmd
+        text: Explore
+      - href: methods.qmd
+        text: Methods
+      - href: data.qmd
+        text: Data & sources
+    right:
+      - icon: github
+        href: https://github.com/TheThunda01/colombia-dengue-atlas
+        aria-label: Source repository
+  page-footer:
+    left: "Brandon Huynh · Colombia Dengue Surveillance Atlas · v1.0"
+    right: "Historical surveillance, 2019–2022 · Not a real-time risk forecast"
+  search: false
+format:
+  html:
+    theme: cosmo
+    css: assets/styles.css
+    toc: false
+    anchor-sections: false
+    lang: en
+    pagetitle: "{{< meta title >}} | Colombia Dengue Atlas"
+execute:
+  echo: false
+  warning: false
+  error: false
+jupyter: python3

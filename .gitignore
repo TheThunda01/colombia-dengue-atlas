@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.quarto/
+site/_site/
+site/.quarto/
+site/.jupyter_cache/
+data/raw/dane/
+*.log
+reports/browser-downloads/

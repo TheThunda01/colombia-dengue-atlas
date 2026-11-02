@@ -1,0 +1,827 @@
+{
+  "id" : "4hyg-wa9d",
+  "name" : "Datos de Vigilancia en Salud Pública de Colombia",
+  "assetType" : "dataset",
+  "attribution" : "Instituto Nacional de Salud - INS, Bogotá D.C.",
+  "attributionLink" : "https://portalsivigila.ins.gov.co/Paginas/Buscador.aspx",
+  "averageRating" : 0,
+  "category" : "Salud y Protección Social",
+  "createdAt" : 1722534363,
+  "description" : "El Sistema Nacional de Vigilancia en Salud Pública -SIVIGILA, que se ha creado para realizar la provisión en forma sistemática y oportuna, de información sobre la dinámica de los eventos que afecten o puedan afectar la salud de la población colombiana, con el fin de (i) Orientar las políticas y la planificación en salud pública, (ii) Tomar las decisiones para la prevención y control de enfermedades y factores de riesgo en salud, (iii) Optimizar el seguimiento y evaluación de las intervenciones, (iv) Racionalizar y optimizar los recursos disponibles y lograr la efectividad de las acciones en esta materia, propendiendo por la protección de la salud individual y colectiva. Este conjunto de datos compila el historico de casos de eventos de interes en salud publica por municipio-departamento de ocurrencia y por semana epidemiológica y año desde 2007.",
+  "diciBackend" : false,
+  "displayType" : "table",
+  "downloadCount" : 700,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "CC_40_BY_SA",
+  "locked" : false,
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 40779507,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1729208242,
+  "publicationGroup" : 19608488,
+  "publicationStage" : "published",
+  "resourceName" : "Ca",
+  "rowsUpdatedAt" : 1729208137,
+  "tableId" : 19608488,
+  "totalTimesRated" : 0,
+  "viewCount" : 7723,
+  "viewLastModified" : 1779130843,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1729280710,
+    "reviewedAutomatically" : false,
+    "state" : "approved",
+    "submissionId" : 6585495,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1729208243,
+    "targetAudience" : "public",
+    "workflowId" : 2188,
+    "reviewer" : {
+      "id" : "vc9x-zjzh",
+      "displayName" : "soporteccc"
+    },
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "endedAt" : 1729280710,
+      "failureCount" : 0,
+      "startedAt" : 1729280710,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "issr-5hya",
+      "displayName" : "DatosabiertosINS"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ {
+    "id" : 600644467,
+    "name" : "COD_EVE",
+    "dataTypeName" : "number",
+    "description" : "Codigo del evento de interes en salud pública asignado por el INS",
+    "fieldName" : "cod_eve",
+    "position" : 1,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218245,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "895",
+      "null" : "0",
+      "top" : [ {
+        "item" : "300",
+        "count" : "361241"
+      }, {
+        "item" : "875",
+        "count" : "235228"
+      }, {
+        "item" : "831",
+        "count" : "201937"
+      }, {
+        "item" : "210",
+        "count" : "200577"
+      }, {
+        "item" : "360",
+        "count" : "87075"
+      }, {
+        "item" : "549",
+        "count" : "82387"
+      }, {
+        "item" : "490",
+        "count" : "80213"
+      }, {
+        "item" : "110",
+        "count" : "78930"
+      }, {
+        "item" : "560",
+        "count" : "78691"
+      }, {
+        "item" : "356",
+        "count" : "75381"
+      }, {
+        "item" : "820",
+        "count" : "71136"
+      }, {
+        "item" : "370",
+        "count" : "70583"
+      }, {
+        "item" : "420",
+        "count" : "67149"
+      }, {
+        "item" : "100",
+        "count" : "60790"
+      }, {
+        "item" : "850",
+        "count" : "59233"
+      }, {
+        "item" : "750",
+        "count" : "50342"
+      }, {
+        "item" : "470",
+        "count" : "48264"
+      }, {
+        "item" : "113",
+        "count" : "44906"
+      }, {
+        "item" : "620",
+        "count" : "42858"
+      }, {
+        "item" : "735",
+        "count" : "36815"
+      } ],
+      "smallest" : "100",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  }, {
+    "id" : 600644466,
+    "name" : "Nombre_evento",
+    "dataTypeName" : "text",
+    "description" : "Nombre del evento de interes en salud pública",
+    "fieldName" : "nombre_evento",
+    "position" : 2,
+    "renderTypeName" : "text",
+    "tableColumnId" : 155218244,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "ZIKA",
+      "null" : "0",
+      "top" : [ {
+        "item" : "AGRESIONES POR ANIMALES POTENCIALMENTE TRANSMISORES DE RABIA",
+        "count" : "361241"
+      }, {
+        "item" : "VCM VIF VSX",
+        "count" : "235228"
+      }, {
+        "item" : "VARICELA INDIVIDUAL",
+        "count" : "201937"
+      }, {
+        "item" : "DENGUE",
+        "count" : "200577"
+      }, {
+        "item" : "INTOXICACION POR PLAGUICIDAS",
+        "count" : "87075"
+      }, {
+        "item" : "MORBILIDAD MATERNA EXTREMA",
+        "count" : "82387"
+      }, {
+        "item" : "MALARIA VIVAX",
+        "count" : "80213"
+      }, {
+        "item" : "BAJO PESO AL NACER",
+        "count" : "78930"
+      }, {
+        "item" : "MORTALIDAD PERINATAL Y NEONATAL TARDÍA",
+        "count" : "78691"
+      }, {
+        "item" : "INTENTO DE SUICIDIO",
+        "count" : "75381"
+      }, {
+        "item" : "TUBERCULOSIS PULMONAR",
+        "count" : "71136"
+      }, {
+        "item" : "INTOXICACION POR FARMACOS",
+        "count" : "70583"
+      }, {
+        "item" : "LEISHMANIASIS CUTANEA",
+        "count" : "67149"
+      }, {
+        "item" : "ACCIDENTE OFIDICO",
+        "count" : "60790"
+      }, {
+        "item" : "VIH/SIDA/MORTALIDAD POR SIDA",
+        "count" : "59233"
+      }, {
+        "item" : "SIFILIS GESTACIONAL",
+        "count" : "50342"
+      }, {
+        "item" : "MALARIA FALCIPARUM",
+        "count" : "48264"
+      }, {
+        "item" : "DESNUTRICIÓN AGUDA EN MENORES DE 5 AÑOS",
+        "count" : "44906"
+      }, {
+        "item" : "PAROTIDITIS",
+        "count" : "42858"
+      }, {
+        "item" : "ANOMALIAS CONGENITAS",
+        "count" : "36815"
+      } ],
+      "smallest" : "ACCIDENTE OFIDICO",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : { }
+  }, {
+    "id" : 600644465,
+    "name" : "SEMANA",
+    "dataTypeName" : "number",
+    "description" : "Semana Epidemiológica de ocurrencia del evento",
+    "fieldName" : "semana",
+    "position" : 3,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218243,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "53",
+      "null" : "0",
+      "top" : [ {
+        "item" : "20",
+        "count" : "48970"
+      }, {
+        "item" : "36",
+        "count" : "48817"
+      }, {
+        "item" : "38",
+        "count" : "48786"
+      }, {
+        "item" : "28",
+        "count" : "48538"
+      }, {
+        "item" : "39",
+        "count" : "48527"
+      }, {
+        "item" : "10",
+        "count" : "48505"
+      }, {
+        "item" : "37",
+        "count" : "48472"
+      }, {
+        "item" : "40",
+        "count" : "48453"
+      }, {
+        "item" : "35",
+        "count" : "48304"
+      }, {
+        "item" : "19",
+        "count" : "48244"
+      }, {
+        "item" : "21",
+        "count" : "48155"
+      }, {
+        "item" : "23",
+        "count" : "48079"
+      }, {
+        "item" : "41",
+        "count" : "47996"
+      }, {
+        "item" : "27",
+        "count" : "47986"
+      }, {
+        "item" : "22",
+        "count" : "47944"
+      }, {
+        "item" : "18",
+        "count" : "47932"
+      }, {
+        "item" : "29",
+        "count" : "47891"
+      }, {
+        "item" : "31",
+        "count" : "47885"
+      }, {
+        "item" : "24",
+        "count" : "47873"
+      }, {
+        "item" : "9",
+        "count" : "47788"
+      } ],
+      "smallest" : "1",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  }, {
+    "id" : 600644464,
+    "name" : "ANO",
+    "dataTypeName" : "number",
+    "description" : "Año de ocurrencia ",
+    "fieldName" : "ano",
+    "position" : 4,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218242,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "2022",
+      "null" : "0",
+      "top" : [ {
+        "item" : "2022",
+        "count" : "215209"
+      }, {
+        "item" : "2019",
+        "count" : "213425"
+      }, {
+        "item" : "2018",
+        "count" : "202207"
+      }, {
+        "item" : "2016",
+        "count" : "201368"
+      }, {
+        "item" : "2017",
+        "count" : "193642"
+      }, {
+        "item" : "2021",
+        "count" : "187598"
+      }, {
+        "item" : "2020",
+        "count" : "183962"
+      }, {
+        "item" : "2015",
+        "count" : "173047"
+      }, {
+        "item" : "2014",
+        "count" : "167258"
+      }, {
+        "item" : "2013",
+        "count" : "154242"
+      }, {
+        "item" : "2012",
+        "count" : "138299"
+      }, {
+        "item" : "2010",
+        "count" : "108854"
+      }, {
+        "item" : "2011",
+        "count" : "107889"
+      }, {
+        "item" : "2009",
+        "count" : "91593"
+      }, {
+        "item" : "2008",
+        "count" : "78928"
+      }, {
+        "item" : "2007",
+        "count" : "48305"
+      } ],
+      "smallest" : "2007",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  }, {
+    "id" : 600644463,
+    "name" : "COD_DPTO_O",
+    "dataTypeName" : "number",
+    "description" : "Codigo DIVIPOLA Departamento de ocurrencia",
+    "fieldName" : "cod_dpto_o",
+    "position" : 5,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218241,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "99",
+      "null" : "0",
+      "top" : [ {
+        "item" : "5",
+        "count" : "306745"
+      }, {
+        "item" : "25",
+        "count" : "181600"
+      }, {
+        "item" : "76",
+        "count" : "160624"
+      }, {
+        "item" : "68",
+        "count" : "126201"
+      }, {
+        "item" : "52",
+        "count" : "110478"
+      }, {
+        "item" : "73",
+        "count" : "104553"
+      }, {
+        "item" : "13",
+        "count" : "102773"
+      }, {
+        "item" : "15",
+        "count" : "101120"
+      }, {
+        "item" : "23",
+        "count" : "99554"
+      }, {
+        "item" : "41",
+        "count" : "99301"
+      }, {
+        "item" : "19",
+        "count" : "95069"
+      }, {
+        "item" : "54",
+        "count" : "90717"
+      }, {
+        "item" : "8",
+        "count" : "82226"
+      }, {
+        "item" : "50",
+        "count" : "80474"
+      }, {
+        "item" : "20",
+        "count" : "71544"
+      }, {
+        "item" : "17",
+        "count" : "68022"
+      }, {
+        "item" : "70",
+        "count" : "66352"
+      }, {
+        "item" : "47",
+        "count" : "64810"
+      }, {
+        "item" : "27",
+        "count" : "63593"
+      }, {
+        "item" : "66",
+        "count" : "54170"
+      } ],
+      "smallest" : "0",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  }, {
+    "id" : 600644462,
+    "name" : "COD_MUN_O",
+    "dataTypeName" : "number",
+    "description" : "Codigo DIVIPOLA Municipio de ocurrencia",
+    "fieldName" : "cod_mun_o",
+    "position" : 6,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218240,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "99773",
+      "null" : "0",
+      "top" : [ {
+        "item" : "11001",
+        "count" : "25811"
+      }, {
+        "item" : "76001",
+        "count" : "23088"
+      }, {
+        "item" : "5001",
+        "count" : "22050"
+      }, {
+        "item" : "8001",
+        "count" : "18206"
+      }, {
+        "item" : "54001",
+        "count" : "17462"
+      }, {
+        "item" : "13001",
+        "count" : "16520"
+      }, {
+        "item" : "50001",
+        "count" : "15965"
+      }, {
+        "item" : "73001",
+        "count" : "15082"
+      }, {
+        "item" : "68001",
+        "count" : "14399"
+      }, {
+        "item" : "41001",
+        "count" : "14358"
+      }, {
+        "item" : "66001",
+        "count" : "14076"
+      }, {
+        "item" : "23001",
+        "count" : "13516"
+      }, {
+        "item" : "20001",
+        "count" : "13438"
+      }, {
+        "item" : "47001",
+        "count" : "12959"
+      }, {
+        "item" : "8758",
+        "count" : "12539"
+      }, {
+        "item" : "52835",
+        "count" : "12313"
+      }, {
+        "item" : "76109",
+        "count" : "12243"
+      }, {
+        "item" : "70001",
+        "count" : "12027"
+      }, {
+        "item" : "5088",
+        "count" : "11980"
+      }, {
+        "item" : "25754",
+        "count" : "11767"
+      } ],
+      "smallest" : "0",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  }, {
+    "id" : 600644461,
+    "name" : "Departamento_ocurrencia",
+    "dataTypeName" : "text",
+    "description" : "Nombre del departamento de ocurrencia del evento",
+    "fieldName" : "departamento_ocurrencia",
+    "position" : 7,
+    "renderTypeName" : "text",
+    "tableColumnId" : 155218239,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "VICHADA",
+      "null" : "0",
+      "top" : [ {
+        "item" : "ANTIOQUIA",
+        "count" : "306745"
+      }, {
+        "item" : "CUNDINAMARCA",
+        "count" : "181600"
+      }, {
+        "item" : "VALLE",
+        "count" : "160624"
+      }, {
+        "item" : "SANTANDER",
+        "count" : "126201"
+      }, {
+        "item" : "NARIÑO",
+        "count" : "110478"
+      }, {
+        "item" : "TOLIMA",
+        "count" : "104553"
+      }, {
+        "item" : "BOLIVAR",
+        "count" : "102773"
+      }, {
+        "item" : "BOYACA",
+        "count" : "101120"
+      }, {
+        "item" : "CORDOBA",
+        "count" : "99554"
+      }, {
+        "item" : "HUILA",
+        "count" : "99301"
+      }, {
+        "item" : "CAUCA",
+        "count" : "95069"
+      }, {
+        "item" : "NORTE SANTANDER",
+        "count" : "90717"
+      }, {
+        "item" : "ATLANTICO",
+        "count" : "82226"
+      }, {
+        "item" : "META",
+        "count" : "80474"
+      }, {
+        "item" : "CESAR",
+        "count" : "71544"
+      }, {
+        "item" : "CALDAS",
+        "count" : "68022"
+      }, {
+        "item" : "SUCRE",
+        "count" : "66352"
+      }, {
+        "item" : "MAGDALENA",
+        "count" : "64810"
+      }, {
+        "item" : "CHOCO",
+        "count" : "63593"
+      }, {
+        "item" : "RISARALDA",
+        "count" : "54170"
+      } ],
+      "smallest" : "AMAZONAS",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : { }
+  }, {
+    "id" : 600644460,
+    "name" : "Municipio_ocurrencia",
+    "dataTypeName" : "text",
+    "description" : "Nombre del Municipio de ocurrencia del evento",
+    "fieldName" : "municipio_ocurrencia",
+    "position" : 8,
+    "renderTypeName" : "text",
+    "tableColumnId" : 155218238,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "ZONA BANANERA",
+      "null" : "0",
+      "top" : [ {
+        "item" : "BOGOTA",
+        "count" : "25811"
+      }, {
+        "item" : "CALI",
+        "count" : "23088"
+      }, {
+        "item" : "MEDELLIN",
+        "count" : "22050"
+      }, {
+        "item" : "BARRANQUILLA",
+        "count" : "18206"
+      }, {
+        "item" : "CUCUTA",
+        "count" : "17462"
+      }, {
+        "item" : "CARTAGENA",
+        "count" : "16520"
+      }, {
+        "item" : "VILLAVICENCIO",
+        "count" : "15965"
+      }, {
+        "item" : "IBAGUE",
+        "count" : "15082"
+      }, {
+        "item" : "BUCARAMANGA",
+        "count" : "14399"
+      }, {
+        "item" : "NEIVA",
+        "count" : "14358"
+      }, {
+        "item" : "PEREIRA",
+        "count" : "14076"
+      }, {
+        "item" : "MONTERIA",
+        "count" : "13516"
+      }, {
+        "item" : "VALLEDUPAR",
+        "count" : "13438"
+      }, {
+        "item" : "SANTA MARTHA",
+        "count" : "12959"
+      }, {
+        "item" : "SOLEDAD",
+        "count" : "12539"
+      }, {
+        "item" : "ARMENIA",
+        "count" : "12314"
+      }, {
+        "item" : "TUMACO",
+        "count" : "12313"
+      }, {
+        "item" : "BUENAVENTURA",
+        "count" : "12243"
+      }, {
+        "item" : "SINCELEJO",
+        "count" : "12027"
+      }, {
+        "item" : "BELLO",
+        "count" : "11980"
+      } ],
+      "smallest" : "ABEJORRAL",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : { }
+  }, {
+    "id" : 600644459,
+    "name" : "conteo",
+    "dataTypeName" : "number",
+    "description" : "Numero de casos de un evento de interes en salud pública ocurridos por semana epidemiologica",
+    "fieldName" : "conteo",
+    "position" : 9,
+    "renderTypeName" : "number",
+    "tableColumnId" : 155218237,
+    "cachedContents" : {
+      "non_null" : "2465826",
+      "largest" : "1541",
+      "null" : "0",
+      "top" : [ {
+        "item" : "1",
+        "count" : "1460972"
+      }, {
+        "item" : "2",
+        "count" : "397376"
+      }, {
+        "item" : "3",
+        "count" : "179335"
+      }, {
+        "item" : "4",
+        "count" : "101286"
+      }, {
+        "item" : "5",
+        "count" : "64408"
+      }, {
+        "item" : "6",
+        "count" : "43906"
+      }, {
+        "item" : "7",
+        "count" : "31757"
+      }, {
+        "item" : "8",
+        "count" : "23971"
+      }, {
+        "item" : "9",
+        "count" : "19304"
+      }, {
+        "item" : "10",
+        "count" : "15502"
+      }, {
+        "item" : "11",
+        "count" : "12534"
+      }, {
+        "item" : "12",
+        "count" : "10537"
+      }, {
+        "item" : "13",
+        "count" : "9090"
+      }, {
+        "item" : "14",
+        "count" : "7710"
+      }, {
+        "item" : "15",
+        "count" : "6649"
+      }, {
+        "item" : "16",
+        "count" : "5839"
+      }, {
+        "item" : "17",
+        "count" : "5030"
+      }, {
+        "item" : "18",
+        "count" : "4604"
+      }, {
+        "item" : "19",
+        "count" : "4137"
+      }, {
+        "item" : "20",
+        "count" : "3634"
+      } ],
+      "smallest" : "1",
+      "count" : "2465826",
+      "cardinality" : "2465826"
+    },
+    "format" : {
+      "decimalSeparator" : ".",
+      "groupSeparator" : ","
+    }
+  } ],
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "Creative Commons Attribution | Share Alike 4.0 International",
+    "logoUrl" : "images/licenses/cc30bysa.png",
+    "termsLink" : "http://creativecommons.org/licenses/by-sa/4.0/legalcode"
+  },
+  "metadata" : {
+    "custom_fields" : {
+      "Información de la Entidad" : {
+        "Municipio" : "Bogotá D.C.",
+        "Nombre de la Entidad" : "Instituto Nacional de Salud - INS, Bogotá D.C.",
+        "DIVIPOLA Municipio" : "11001",
+        "Orden" : "Nacional",
+        "Sector" : "Salud",
+        "Departamento" : "Bogotá D.C."
+      },
+      "Información de Datos" : {
+        "Cobertura Geográfica" : "Nacional",
+        "Idioma" : "Español",
+        "Frecuencia de Actualización" : "Anual"
+      }
+    }
+  },
+  "owner" : {
+    "id" : "issr-5hya",
+    "displayName" : "DatosabiertosINS",
+    "screenName" : "DatosabiertosINS",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "issr-5hya",
+    "displayName" : "DatosabiertosINS",
+    "screenName" : "DatosabiertosINS",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "flags" : [ "default", "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}

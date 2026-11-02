@@ -1,0 +1,37 @@
+{
+  "retrieved_date": "2026-11-02",
+  "population_release_date": "2025-08-08",
+  "population_workbook_update_date": "2025-07-30",
+  "boundary_version": "MGN2025",
+  "boundary_item_modified_utc": "2026-05-28T01:25:28+00:00",
+  "inputs": [
+    {
+      "path": "data/raw/dane/population.xlsx",
+      "url": "https://www.dane.gov.co/files/censo2018/proyecciones-de-poblacion/Departamental/PPED-AreaDep-2018-2050_VP.xlsx",
+      "title": "DANE department population by area, 2018–2050; CNPV2018, 2025 revision",
+      "bytes": 1034528,
+      "sha256": "afd5befe9dfc49fd83c5f7b592fbd8eee9e4519736a82129db876a052e9b91bf"
+    },
+    {
+      "path": "data/raw/dane/departments.geojson",
+      "url": "https://services.arcgis.com/ioNRSZMYYlx0PUaB/arcgis/rest/services/MGN2025_DPTO_POLITICO/FeatureServer/0/query?where=1%3D1&outFields=%2A&outSR=4326&returnGeometry=true&f=geojson",
+      "title": "DANE Marco Geoestadístico Nacional 2025, department polygons",
+      "bytes": 39868611,
+      "sha256": "acd8ba58821c461961e41e1169d386710e6d503ed4aae73f6b6c026aaf91b7e6"
+    },
+    {
+      "path": "data/provenance/boundary-layer-metadata.json",
+      "url": "https://services.arcgis.com/ioNRSZMYYlx0PUaB/arcgis/rest/services/MGN2025_DPTO_POLITICO/FeatureServer/0?f=pjson",
+      "title": "ArcGIS layer metadata",
+      "bytes": 14410,
+      "sha256": "fccc0d58d1851fbf5e01ed45e79efd2fc1b0248b37b0fe87e5f6998e9a22f5b7"
+    },
+    {
+      "path": "data/provenance/boundary-item-metadata.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/7023d9d31e834840a9136ccaa6426432?f=json",
+      "title": "DANE ArcGIS catalog item metadata",
+      "bytes": 1382,
+      "sha256": "3e0200e5a41e7fae41886396c46dc17f986ab835a2d2a450a08a94b07e22f554"
+    }
+  ]
+}

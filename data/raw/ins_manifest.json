@@ -1,0 +1,64 @@
+{
+  "source_id": "ins-socrata-4hyg-wa9d",
+  "dataset_id": "4hyg-wa9d",
+  "license": "CC-BY-SA-4.0",
+  "snapshot_date": "2026-11-02",
+  "files": [
+    {
+      "year": 2019,
+      "url": "https://www.datos.gov.co/resource/4hyg-wa9d.json?%24where=ano%3D2019+AND+cod_eve+in%28210%2C220%29&%24order=cod_eve%2Csemana%2Ccod_dpto_o%2Ccod_mun_o&%24limit=50000",
+      "bytes": 3628241,
+      "sha256": "abf0ee9e2e967ddf0b381d7481dda6bb58c2f33e5fbec7287f6bdd7ce90631af",
+      "retrieved_at_utc": "2026-11-02T13:56:54.779516+00:00",
+      "rows": 18696,
+      "http_last_modified": "Thu, 17 Oct 2024 23:37:22 GMT",
+      "filename": "ins_dengue_2019.json"
+    },
+    {
+      "year": 2020,
+      "url": "https://www.datos.gov.co/resource/4hyg-wa9d.json?%24where=ano%3D2020+AND+cod_eve+in%28210%2C220%29&%24order=cod_eve%2Csemana%2Ccod_dpto_o%2Ccod_mun_o&%24limit=50000",
+      "bytes": 2791235,
+      "sha256": "163c3e021c857ed6b9db600b233c1fd9e31ad04bcda7662048cc4d0efe08d39f",
+      "retrieved_at_utc": "2026-11-02T13:56:55.877142+00:00",
+      "rows": 14445,
+      "http_last_modified": "Thu, 17 Oct 2024 23:37:22 GMT",
+      "filename": "ins_dengue_2020.json"
+    },
+    {
+      "year": 2021,
+      "url": "https://www.datos.gov.co/resource/4hyg-wa9d.json?%24where=ano%3D2021+AND+cod_eve+in%28210%2C220%29&%24order=cod_eve%2Csemana%2Ccod_dpto_o%2Ccod_mun_o&%24limit=50000",
+      "bytes": 2022391,
+      "sha256": "fbb648030b79e02e2b9d663295a76cc475d61711b56f69af0f5902488e965f9b",
+      "retrieved_at_utc": "2026-11-02T13:56:57.584943+00:00",
+      "rows": 10449,
+      "http_last_modified": "Thu, 17 Oct 2024 23:37:22 GMT",
+      "filename": "ins_dengue_2021.json"
+    },
+    {
+      "year": 2022,
+      "url": "https://www.datos.gov.co/resource/4hyg-wa9d.json?%24where=ano%3D2022+AND+cod_eve+in%28210%2C220%29&%24order=cod_eve%2Csemana%2Ccod_dpto_o%2Ccod_mun_o&%24limit=50000",
+      "bytes": 2618557,
+      "sha256": "d0816f3f9cfdf31739b3b13ac20e200476556418e108d0f26551e4537557d35b",
+      "retrieved_at_utc": "2026-11-02T13:56:58.801577+00:00",
+      "rows": 13493,
+      "http_last_modified": "Thu, 17 Oct 2024 23:37:22 GMT",
+      "filename": "ins_dengue_2022.json"
+    },
+    {
+      "filename": "ins_metadata.json",
+      "url": "https://www.datos.gov.co/api/views/4hyg-wa9d.json",
+      "bytes": 20459,
+      "sha256": "3a090e9ff95e4bc29fe7a1fee7943a84e8d197d35beef843bec038f951d12537",
+      "retrieved_at_utc": "2026-11-02T13:58:20.247491+00:00",
+      "http_last_modified": null
+    },
+    {
+      "filename": "ins_independent_weekly_totals.json",
+      "url": "https://www.datos.gov.co/resource/4hyg-wa9d.json?%24select=ano%2Ccod_eve%2Ccod_dpto_o%2Csemana%2Csum%28conteo%29+as+cases%2Ccount%28%2A%29+as+source_rows&%24where=ano+between+2019+and+2022+AND+cod_eve+in%28210%2C220%29&%24group=ano%2Ccod_eve%2Ccod_dpto_o%2Csemana&%24order=ano%2Ccod_eve%2Ccod_dpto_o%2Csemana&%24limit=50000",
+      "bytes": 790709,
+      "sha256": "21d22813b81136e6e4a91ca22250e91eb71a0ff1cb24cfbc603dc94c9d368f03",
+      "retrieved_at_utc": "2026-11-02T13:58:22.802892+00:00",
+      "http_last_modified": "Thu, 17 Oct 2024 23:37:22 GMT"
+    }
+  ]
+}

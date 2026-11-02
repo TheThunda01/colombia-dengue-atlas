@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-11-02T14:19:45.894127+00:00",
+  "url": "http://127.0.0.1:4201/",
+  "browser_channel": "msedge",
+  "checks": [
+    "Desktop initial render: 313814 dengue counts, 33 map units, 132 summary rows, two rendered charts, no horizontal overflow",
+    "Default summary CSV agrees with table and source totals; Bogota remains blank",
+    "Department/year/week/rate filters, persisted URL, timeline and seasonal series agree with both CSV exports and year-specific rate arithmetic",
+    "Keyboard map selection and Bogota empty state preserve unavailable counts/rates despite available population",
+    "Severe dengue stays separate; sparse Vaupes observations have point marks even between gaps",
+    "Single-week point visible; inverted range shows empty state, disables downloads and never emits NaN map values",
+    "Week53-only export includes only2020; other years are not invented",
+    "390px mobile portrait: filters/reset work, charts render, no page overflow; screenshots captured",
+    "844px narrow landscape: no page overflow",
+    "Overview, methods, data and same-site links return200; executed Python source table and exported figure load",
+    "Data-load failure produces an informative visible fallback"
+  ],
+  "page_errors": [],
+  "http_errors": [],
+  "passed": true,
+  "visual_review": "Screenshots captured; human/model visual review is recorded separately in RELEASE_REPORT.md.",
+  "additional_narrow_page_check": "390px overview, methods and data pages checked; data-table overflow corrected to local horizontal scrolling; all pages now390px wide."
+}

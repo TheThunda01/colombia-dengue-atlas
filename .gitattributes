@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# Preserve downloaded source response bytes exactly for SHA-256 verification.
+data/raw/** -text
+data/provenance/** -text
+*.png binary
+*.pdf binary

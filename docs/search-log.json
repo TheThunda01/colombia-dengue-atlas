@@ -1,0 +1,128 @@
+{
+  "title": "PAHO dengue source-feasibility search and inspection log",
+  "assessment_date": "2026-11-02",
+  "scope": "Queries and accesses actually performed by the PAHO source investigator for this atlas. This is not an exhaustive project search log or systematic literature review.",
+  "search_provider": "web search tool",
+  "queries": [
+    {
+      "query": "site.paho.org dengue data PLISA download Colombia weekly cases data",
+      "purpose": "Locate official dengue data and downloads."
+    },
+    {
+      "query": "site.paho.org dengue indicators csv Colombia department",
+      "purpose": "Assess department-level availability."
+    },
+    {
+      "query": "site.paho.org dengue \"csv\" \"2024\"",
+      "purpose": "Find machine-readable dengue downloads."
+    },
+    {
+      "query": "site.opendata.paho.org \"Dengue\" \"Download\"",
+      "purpose": "Find public download documentation."
+    },
+    {
+      "query": "site.paho.org dengue tableau \"Country\"",
+      "purpose": "Locate country dashboard data access."
+    },
+    {
+      "query": "site.help.tableau.com export csv views sheet parameter dashboard",
+      "purpose": "Verify dashboard-versus-worksheet export behavior."
+    },
+    {
+      "query": "site.paho.org \"1030\" \"dengue\"",
+      "purpose": "Identify the official Colombia dashboard workbook context."
+    }
+  ],
+  "inspected_resources": [
+    {
+      "organization": "PAHO",
+      "title": "Dengue indicators, PLISA",
+      "url": "https://opendata.paho.org/en/dengue-indicators",
+      "access": "Web fetch returned 403; direct HTTP retrieval succeeded and HTML was inspected.",
+      "finding": "Weekly national surveillance description, legacy subnational menu, and CC BY-NC 3.0 IGO footer. Legacy menu omits Colombia."
+    },
+    {
+      "organization": "PAHO",
+      "title": "ARBO Portal",
+      "url": "https://www.paho.org/en/arbo-portal",
+      "access": "Web fetch returned 403; direct HTTP retrieval succeeded and HTML was inspected.",
+      "finding": "Data are preliminary and may increase or decrease during national validation; a newer Colombia country profile exists."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Colombia country profile",
+      "url": "https://www.paho.org/en/arbo-portal/countries/colombia-country-profile",
+      "access": "Direct HTTP HTML retrieved and inspected.",
+      "finding": "Embeds the official Colombia Tableau dashboard wrapper."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Dengue data and analysis",
+      "url": "https://www.paho.org/en/arbo-portal/dengue-data-and-analysis",
+      "access": "Direct HTTP HTML retrieved and inspected.",
+      "finding": "Regional dengue surveillance description and regional dashboard wrapper."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Terms and conditions of use of the site",
+      "url": "https://www.paho.org/en/terms-and-conditions-use-site",
+      "access": "Direct HTTP HTML retrieved and inspected.",
+      "finding": "Attribution and endorsement limits; source resources may have distinct rights."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Colombia dashboard wrapper",
+      "url": "https://ais.paho.org/ArboPortal/DENG/1030_DENG_COL_Indicadores.asp",
+      "access": "Direct HTTP retrieval and public embedded Tableau session inspection. Temporary public-view tickets are deliberately not retained in this log.",
+      "finding": "Visible aggregates inspected: 668 national weekly rows, 104 national indicator rows, 32 departmental map rows, one latest-week indicator. Historical departmental panel semantics were not established."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Colombia Tableau summary view",
+      "url": "https://phip.paho.org/views/1030/Resumen?:embed=y&:comments=no&:toolbar=yes",
+      "access": "Opened through the official public wrapper. Read-only tableauscraper extraction of visible aggregate worksheets.",
+      "finding": "New Suspected Cases weekly field; no person-level fields requested. Nonpublished dashboard navigation did not establish additional historical departmental data."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Colombia dashboard-level CSV",
+      "url": "https://phip.paho.org/views/1030/Resumen.csv?:showVizHome=no",
+      "access": "Unsessioned request returned 403; request within the official wrapper public session returned CSV.",
+      "finding": "Export contained only the latest-week worksheet (2026, week 41), not the complete dashboard dataset."
+    },
+    {
+      "organization": "PAHO",
+      "title": "Regional dengue dashboard wrapper",
+      "url": "https://ais.paho.org/arboportal/DENG/1001en_DENG_AME_Cases.asp",
+      "access": "Direct HTTP wrapper HTML retrieved and inspected.",
+      "finding": "Links to regional Tableau workbook 1001en; regional observations were not extracted for production use."
+    },
+    {
+      "organization": "Tableau",
+      "title": "Download Views and Workbooks",
+      "url": "https://help.tableau.com/current/pro/desktop/en-us/export.htm",
+      "access": "Official search-result excerpt inspected; no full-page retrieval claimed.",
+      "finding": "Dashboard downloads require selecting the intended worksheet."
+    },
+    {
+      "organization": "Tableau",
+      "title": "Workbooks and Views Methods",
+      "url": "https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_ref_workbooks_and_views.htm",
+      "access": "Official search-result excerpt inspected; no full-page retrieval claimed.",
+      "finding": "A dashboard CSV request can return the first view only."
+    }
+  ],
+  "decision": "Use PAHO for contextual source assessment only. No PAHO observations are combined with or redistributed in the atlas.",
+  "limitations": [
+    "Searches were targeted and not exhaustive.",
+    "No final historical department-level PAHO export contract was verified.",
+    "Date basis, district inclusion, and rate denominator semantics remain unresolved for the inspected PAHO map.",
+    "INS and DANE retrieval evidence is maintained separately in their source manifests and assessments."
+  ],
+  "related_documents": [
+    "paho-source-assessment.md",
+    "sources.md",
+    "reference-audit.md",
+    "literature-review.md"
+  ]
+}

@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite this software and retain the source-dataset citations in docs/sources.md and DATA_LICENSE.md."
+type: software
+title: "Colombia Dengue Surveillance Atlas"
+version: 1.0.0
+authors:
+  - family-names: Huynh
+    given-names: Brandon
+repository-code: "https://github.com/TheThunda01/colombia-dengue-atlas"
+url: "https://thethunda01.github.io/colombia-dengue-atlas/"
+abstract: "A reproducible static atlas for descriptive comparison of Colombian department-level dengue surveillance observations, 2019–2022, with explicit source availability, provenance, and population-denominator limitations."
+keywords:
+  - dengue
+  - Colombia
+  - surveillance
+  - scientific visualization
+  - spatial epidemiology
+  - reproducibility
+license: MIT

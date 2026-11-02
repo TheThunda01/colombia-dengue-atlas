@@ -1,0 +1,6 @@
+---
+title: "Methods & interpretation"
+toc: true
+---
+
+{{< include ../docs/methods.md >}}

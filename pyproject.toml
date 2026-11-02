@@ -1,0 +1,25 @@
+[project]
+name = "colombia-dengue-atlas"
+version = "1.0.0"
+description = "Reproducible departmental dengue surveillance atlas for Colombia"
+requires-python = ">=3.12,<3.13"
+authors = [{name = "Brandon Huynh"}]
+dependencies = [
+  "pandas>=2.2,<3",
+  "numpy>=2,<3",
+  "geopandas>=1,<2",
+  "plotly>=6,<7",
+  "matplotlib>=3.9,<4",
+  "openpyxl>=3.1,<4",
+  "requests>=2.32,<3",
+  "jupyter>=1.1,<2",
+  "ipykernel>=6,<8",
+  "pyyaml>=6,<7",
+  "pytest>=8,<10",
+  "playwright>=1.50,<2",
+  "beautifulsoup4>=4.12,<5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

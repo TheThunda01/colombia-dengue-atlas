@@ -1,0 +1,16 @@
+{
+  "surveillance_cells": 13794,
+  "population_rows": 132,
+  "mapped_units": 33,
+  "unmatched_geographic_codes": 0,
+  "invalid_json_numbers": 0,
+  "atlas_bytes": 3296220,
+  "inputs": {
+    "departments.geojson": "8a9b8cdcfb8373bf5f38b9360fb32cbdcd03de2b3396fd890ae1766f9fb46b12",
+    "population.csv": "ba2fcec7fcd6af6bf117b6de7a532fa914b0713cbd7c2cb3bf1c650c6f245b1e",
+    "surveillance_audit.json": "ea310b4a7092e34525a56df61ac665fe91596eaafcedddd05fee52829c22cf16",
+    "surveillance_weekly.csv": "72c24ba46272ca5a5b162351e6229ef71144cde88d162903a6be4f7534ded4b4",
+    "surveillance_weekly.json": "528dffe73b91e313bbfe3d40d01823b5677c062d6e756a0572d91d85ed691da1"
+  },
+  "browser_data_sha256": "3d200261906b98481796456df5ac3ce9a61815e58472f5b563b213a1c2217512"
+}

@@ -1,0 +1,24 @@
+{
+  "recorded_date": "2026-11-02",
+  "os": "Windows-11-10.0.26300-SP0",
+  "architecture": "AMD64",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "executable": "project .venv/Scripts/python.exe (selected by uv)",
+  "tools": {
+    "uv": "uv 0.11.15 (3cffe97c2 2026-05-18 x86_64-pc-windows-msvc)",
+    "git": "git version 2.56.0.windows.2",
+    "quarto": "1.9.37",
+    "node": "v24.22.0"
+  },
+  "packages": {
+    "pandas": "2.3.3",
+    "numpy": "2.5.4",
+    "geopandas": "1.2.0",
+    "plotly": "6.9.0",
+    "matplotlib": "3.11.2",
+    "jupyter": "1.1.1",
+    "ipykernel": "7.4.0",
+    "pytest": "9.2.0",
+    "playwright": "1.64.1"
+  }
+}
