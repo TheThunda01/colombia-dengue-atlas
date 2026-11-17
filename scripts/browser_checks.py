@@ -65,6 +65,14 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         assert sum(int(r['cases']) for r in rows if r['cases'])==313814
         assert len([r for r in rows if r['department_code']=='11' and r['cases']==''])==4
         assert 'all-2019-2022' in name
+        year_bars=page.locator('#annual-availability li')
+        assert year_bars.count()==4
+        for i,year in enumerate(sorted({r['year'] for r in rows})):
+            selected=[r for r in rows if r['year']==year]
+            present=sum(int(r['source_present_weeks']) for r in selected)
+            expected=sum(int(r['expected_weeks']) for r in selected)
+            assert f'{present:,} of {expected:,} cells' in year_bars.nth(i).inner_text()
+        checks.append('Annual availability bars agree with the downloaded department-year summaries')
         checks.append('Default summary CSV agrees with table and source totals; Bogota remains blank')
         # A rate color must retain its meaning as the selected time window changes.
         select('metric','rate')

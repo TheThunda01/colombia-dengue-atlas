@@ -664,3 +664,32 @@ body:has(.hero) #title-block-header {
   color: #52666d;
   font-size: 0.82rem;
 }
+
+.availability-panel {
+  margin: 1rem 0 2rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  border: 1px solid #ccd7d8;
+}
+.availability-panel p { max-width: 65ch; }
+#annual-availability { list-style: none; padding: 0; }
+#annual-availability li {
+  display: grid;
+  grid-template-columns: 3rem minmax(2rem, 24rem) minmax(7rem, auto);
+  gap: .75rem;
+  align-items: center;
+  margin: .35rem 0;
+  font-variant-numeric: tabular-nums;
+}
+#annual-availability .empty-period { display: block; }
+.availability-track, .availability-track span { height: .7rem; display: block; }
+.availability-track { background: #e1e7e6; }
+.availability-track span { background: #166b70; }
+@media (max-width: 650px) {
+  #annual-availability li {
+    grid-template-columns: auto 1fr;
+    gap: .25rem .75rem;
+    margin: .7rem 0;
+  }
+  #annual-availability li > span:last-child { text-align: right; }
+  .availability-track { grid-row: 2; grid-column: 1 / -1; }
+}

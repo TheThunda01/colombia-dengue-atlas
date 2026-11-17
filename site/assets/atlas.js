@@ -3,6 +3,7 @@ import {
   readState,
   selectedRows,
   summaries,
+  annualAvailability,
   mapSummaries,
   rateScaleMaximum,
   timeSeries,
@@ -271,6 +272,12 @@ async function renderPlots() {
 }
 function renderTable() {
   latestSummary = summaries(data, state);
+  const availability = annualAvailability(latestSummary);
+  $("annual-availability").innerHTML = availability.length
+    ? availability.map(({ year, present, expected }) => `
+        <li><strong>${year}</strong><span class="availability-track" aria-hidden="true"><span style="width:${100 * present / expected}%"></span></span><span>${fmt(present)} of ${fmt(expected)} cells</span></li>`
+      ).join("")
+    : '<li class="empty-period">No weeks in this selection.</li>';
   latestWeekly = selectedRows(data, state).map((r) => ({
     ...r,
     snapshot_date: data.meta.snapshot_date,

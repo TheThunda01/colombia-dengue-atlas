@@ -107,9 +107,11 @@ views describe the same pinned input release.
 
 ## Practical use and limitations
 
-Choose an event, department, and comparable set of source weeks; inspect the
-availability counts before comparing years. Download the table to preserve the
-selection and its interpretation. Occurrence/procedence geography is not
+Choose an event and department, then use the same weeks for each year. Check the
+annual availability bars before comparing counts. If one year has fewer source
+rows, the two totals draw on different amounts of observed data. The labels
+show how many department-week cells contributed and how many were possible.
+Download the summary to keep those counts with your selection. Occurrence/procedence geography is not
 necessarily residence, and the API does not establish whether weeks derive from
 notification or symptom onset. The atlas preserves the source week labels,
 including week 53 in 2020, rather than relabeling them as calendar dates.
