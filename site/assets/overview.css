@@ -1,0 +1,168 @@
+/* The hero supplies this page's visible h1. Keep the document title for navigation. */
+#title-block-header { display: none; }
+.atlas-overview {
+  --overview-line: #cbd7d1;
+  --overview-field: #f2f4ec;
+  max-width: 76rem;
+  margin: 0 auto;
+  color: #18383d;
+}
+.overview-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .94fr);
+  align-items: stretch;
+  background: #fafbf7;
+  border-block: 1px solid var(--overview-line);
+}
+.overview-intro {
+  align-self: center;
+  padding: clamp(1.6rem, 5vw, 4.2rem);
+}
+.overview-intro h1 {
+  font: 600 clamp(3rem, 5.4vw, 5.3rem)/.99 Georgia, "Times New Roman", serif;
+  letter-spacing: -.055em;
+  margin: 0 0 1.5rem;
+  max-width: 10ch;
+}
+.overview-intro p {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.65;
+  margin: 0 0 1.4rem;
+}
+.overview-intro .overview-dateline {
+  color: #315f5f;
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 0 0 1.15rem;
+}
+.overview-intro p:last-child { margin-bottom: 0; }
+.overview-primary, .overview-secondary {
+  display: inline-block;
+  font-weight: 650;
+  font-size: .96rem;
+  padding: .62rem .94rem;
+  margin: .18rem .3rem .18rem 0;
+  border: 1px solid #286867;
+  border-radius: .25rem;
+  text-decoration: none;
+}
+.overview-primary { background: #175a5b; color: white; }
+.overview-primary:hover { background: #123f41; color: white; }
+.overview-secondary { color: #205b5b; }
+.overview-secondary:hover { color: #113c3d; background: #e5efeb; }
+.overview-map {
+  margin: 0;
+  background: var(--overview-field);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem .8rem;
+  border-left: 1px solid var(--overview-line);
+}
+.overview-map svg { width: 100%; max-width: 28rem; display: block; }
+.overview-map-label {
+  fill: #133639;
+  stroke: var(--overview-field);
+  paint-order: stroke fill;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  font: 650 21px system-ui, sans-serif;
+}
+.overview-map figcaption {
+  max-width: 41ch;
+  margin: .5rem auto 0;
+  font-size: .82rem;
+  color: #485c59;
+  text-align: left;
+}
+.overview-section {
+  margin: clamp(2.2rem, 5vw, 4.1rem) auto;
+  max-width: 65rem;
+  padding: 0 clamp(.4rem, 2vw, 1.6rem);
+}
+.overview-section h2 {
+  margin: 0 0 .85rem;
+  border: 0;
+  font: 600 clamp(1.8rem, 3.2vw, 2.65rem)/1.08 Georgia, "Times New Roman", serif;
+  letter-spacing: -.035em;
+}
+.overview-section p { max-width: 77ch; }
+.overview-source { font-weight: 600; white-space: normal; }
+.overview-table-wrap {
+  margin: 1.4rem 0 1rem;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.overview-table {
+  width: 100%;
+  max-width: 53rem;
+  font-size: .99rem;
+  border-top: 2px solid #427270;
+  color: #18383d;
+  font-variant-numeric: tabular-nums;
+}
+.overview-table caption {
+  caption-side: top;
+  text-align: left;
+  font-size: .95rem;
+  color: #385453;
+  font-weight: 650;
+  padding: 0 0 .55rem;
+}
+.overview-table th, .overview-table td {
+  position: static;
+  text-align: right;
+  padding: .75rem .85rem;
+  border-bottom: 1px solid var(--overview-line);
+}
+.overview-table thead th {
+  background: #edf2ee;
+  white-space: normal;
+  line-height: 1.28;
+  font-size: .88rem;
+  vertical-align: bottom;
+}
+.overview-table tbody th { background: transparent; font-weight: 650; }
+.overview-table th:first-child { text-align: left; }
+.overview-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.overview-flow li { position: relative; border-top: 2px solid #57817e; padding: .75rem 0 .3rem; }
+.overview-flow li + li::before {
+  content: "";
+  position: absolute;
+  top: 1.2rem;
+  left: -1.3rem;
+  width: .5rem;
+  height: .5rem;
+  border-right: 2px solid #54716e;
+  border-top: 2px solid #54716e;
+  transform: rotate(45deg);
+}
+.overview-flow strong { display: block; margin-bottom: .35rem; }
+.overview-flow span { display: block; font-size: .95rem; }
+.overview-more { border-top: 1px solid var(--overview-line); padding-top: 1.75rem; }
+@media (max-width: 48rem) {
+  .overview-lead { grid-template-columns: minmax(0,1fr); }
+  .overview-intro { padding: 1.6rem 1.15rem; }
+  .overview-intro h1 { max-width: 17ch; font-size: clamp(2.12rem, 8.8vw, 3.2rem); }
+  .overview-table { font-size: .88rem; }
+  .overview-table th, .overview-table td { padding: .65rem .25rem; white-space: normal; }
+  .overview-table thead th { font-size: .83rem; }
+  .overview-map { border-left: 0; border-top: 1px solid var(--overview-line); }
+  .overview-map svg { max-width: 21rem; }
+  .overview-flow { grid-template-columns: 1fr; gap: .65rem; }
+  .overview-flow li { border-top: 0; border-left: 2px solid #57817e; padding: 0 0 .25rem .8rem; }
+  .overview-flow li + li::before { display: none; }
+}
+@media (max-width: 28rem) {
+  /* Quarto reserves page gutters on both sides. Recover room for the two place columns. */
+  .atlas-overview { margin-inline: -1rem; }
+  .overview-section { padding-inline: .15rem; }
+}
