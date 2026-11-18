@@ -65,6 +65,14 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         assert sum(int(r['cases']) for r in rows if r['cases'])==313814
         assert len([r for r in rows if r['department_code']=='11' and r['cases']==''])==4
         assert 'all-2019-2022' in name
+        year_bars=page.locator('#annual-availability li')
+        assert year_bars.count()==4
+        for i,year in enumerate(sorted({r['year'] for r in rows})):
+            selected=[r for r in rows if r['year']==year]
+            present=sum(int(r['source_present_weeks']) for r in selected)
+            expected=sum(int(r['expected_weeks']) for r in selected)
+            assert f'{present:,} of {expected:,} cells' in year_bars.nth(i).inner_text()
+        checks.append('Annual availability bars agree with the downloaded department-year summaries')
         checks.append('Default summary CSV agrees with table and source totals; Bogota remains blank')
         # A rate color must retain its meaning as the selected time window changes.
         select('metric','rate')
@@ -214,6 +222,40 @@ def run(url: str, channel: str|None, report_name: str, screenshot_dir: str|None=
         assert {urljoin(url,name) for name in document_pages}<=reachable
         checks.append('Build guide, tools, reasoning, glossary and figures load without desktop/mobile overflow and are reachable through site navigation')
         checks.append('Figure download links serve valid nonempty SVG, PNG and PDF files')
+        # Follow the public-health entry points from the rendered homepage.
+        page.goto(urljoin(url, 'index.html'))
+        comparison = page.locator('.overview-table')
+        assert comparison.locator('thead th').all_inner_texts() == ['Measure', 'Antioquia', 'Bogotá D.C.']
+        expected_rows = [
+            ['Weeks with records', '52 of 52', '0 of 52'],
+            ['Recorded cases', '4,980', 'Unavailable'],
+            ['Total residents', '6,518,070', '7,533,202'],
+            ['Cases per 100,000 residents', '76.4', 'Unavailable'],
+        ]
+        table_rows = comparison.locator('tbody tr')
+        assert table_rows.count() == len(expected_rows)
+        for row, values in zip(table_rows.all(), expected_rows, strict=True):
+            assert row.locator('th, td').all_inner_texts() == values
+        assert page.locator('.overview-map svg').get_attribute('role') == 'img'
+        page.get_by_role('link', name='Explore Antioquia in 2019').click()
+        ready()
+        assert page.locator('#kpi-cases').inner_text() == '4,980'
+        assert page.locator('#kpi-availability').inner_text() == '52 / 52'
+        assert page.locator('#kpi-rate').inner_text() == '76.4'
+        page.screenshot(path=str(screenshots / 'antioquia-2019-desktop.png'))
+        page.set_viewport_size({'width': 390, 'height': 844})
+        page.locator('.example-links').get_by_role('link', name='Bogotá').click()
+        ready()
+        assert page.locator('#kpi-cases').inner_text() == 'No data'
+        assert page.locator('#kpi-availability').inner_text() == '0 / 52'
+        assert page.locator('#kpi-rate').inner_text() == 'No data'
+        assert page.locator('.example-links a[aria-current]').inner_text() == 'Bogotá'
+        page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+        page.screenshot(path=str(screenshots / 'bogota-2019-mobile.png'))
+        exported, _ = downloaded('download')
+        assert len(exported) == 1 and exported[0]['cases'] == '' and exported[0]['cases_per_100k'] == ''
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+        checks.append('Worked comparison opens both saved views, preserves missing Bogotá values in CSV, and fits mobile portrait')
         # Verify a visible failure state using a separate page with deliberate network failure.
         offline=context.new_page();offline.route('**/data/atlas.json',lambda route:route.abort())
         offline.goto(urljoin(url,'explore.html'),wait_until='domcontentloaded');offline.locator('#app-error').wait_for(state='visible')

@@ -94,6 +94,16 @@ export function summaries(data, s, context = false) {
         a.year - b.year,
     );
 }
+export function annualAvailability(summaryRows) {
+  const years = new Map();
+  for (const row of summaryRows) {
+    const counts = years.get(row.year) ?? { year: row.year, present: 0, expected: 0 };
+    counts.present += row.source_present_weeks;
+    counts.expected += row.expected_weeks;
+    years.set(row.year, counts);
+  }
+  return [...years.values()].sort((a, b) => a.year - b.year);
+}
 export function mapSummaries(data, s) {
   const annual = summaries(data, s, true),
     years = s.end - s.start + 1;

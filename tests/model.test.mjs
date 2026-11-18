@@ -7,6 +7,7 @@ import {
   sumPresent,
   selectedRows,
   summaries,
+  annualAvailability,
   mapSummaries,
   rateScaleMaximum,
   timeSeries,
@@ -351,4 +352,17 @@ test("CSV round-trips comma and quote text while protecting formula prefixes", (
     "0",
     "",
   ]);
+});
+
+test("annual availability uses selected cells, including absent rows and the source week 53", () => {
+  const actual = (filters) => annualAvailability(summaries(data, state(filters)));
+  assert.deepEqual(actual({ department: "11", first: 53, last: 53 }), [
+    { year: 2020, present: 0, expected: 1 },
+  ]);
+  assert.deepEqual(actual({ start: 2022, end: 2019 }), []);
+  for (const year of actual({})) {
+    const rows = data.rows.filter((r) => r.event_code === "210" && r.year === year.year);
+    assert.equal(year.expected, rows.length);
+    assert.equal(year.present, rows.filter((r) => r.cases !== null).length);
+  }
 });

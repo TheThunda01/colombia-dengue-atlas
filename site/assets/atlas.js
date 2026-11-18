@@ -3,6 +3,7 @@ import {
   readState,
   selectedRows,
   summaries,
+  annualAvailability,
   mapSummaries,
   rateScaleMaximum,
   timeSeries,
@@ -85,9 +86,11 @@ function renderMap() {
     max = rate
       ? rateMaxima[state.event]
       : Math.max(1, ...map.map((d) => d.cases ?? 0));
-  $("map-subtitle").textContent = rate
-    ? "Mean of yearly selected-week cases per 100,000 total residents. Each year uses its own DANE population."
-    : "Circle area is proportional to recorded cases summed across the selected years and weeks.";
+  const rateDefinition = state.start === state.end
+    ? `Cases in the selected weeks per 100,000 total residents in ${state.start}. The denominator comes from DANE.`
+    : "Mean of yearly selected-week cases per 100,000 total residents. Each year uses its own DANE population.";
+  $("map-subtitle").textContent = rate ? rateDefinition
+    : "Circle area shows the number of recorded cases summed over the selected weeks.";
   const fill = (d) => {
     if (val(d) === null) return "url(#missing)";
     if (!rate) return "#e4ece9";
@@ -129,17 +132,22 @@ function renderMap() {
     ? `<div class="rate-legend"><div class="rate-gradient"></div><div class="legend-endpoints"><span>0</span><span>${dec(max)}</span></div><span>Recorded cases per 100,000 residents</span></div>${missingKey}<p class="legend-note">Fixed color scale for event ${state.event}, 2019–2022. Colors stay comparable when you change the period.</p>`
     : `${map.some((d) => d.cases !== null) ? `<span class="legend-key"><svg width="50" height="50" aria-hidden="true"><circle cx="25" cy="25" r="24" fill="#166b70" fill-opacity=".58"/></svg>${fmt(max)} cases</span><span class="legend-key"><svg width="26" height="50" aria-hidden="true"><circle cx="13" cy="25" r="12" fill="#166b70" fill-opacity=".58"/></svg>${dec(max / 4)} cases</span>` : "<span>No recorded values in this period.</span>"}${missingKey}<p class="legend-note">Circle area represents count. Symbol sizes rescale for the current period.</p>`;
   const focused = map.find((d) => d.code === state.department);
+  let focusedValue = "No data for this selection";
+  if (focused && val(focused) !== null) {
+    const rateLabel = state.start === state.end ? "per 100,000 residents" : "per 100,000 residents (mean across years)";
+    focusedValue = rate ? `${dec(focused.rate)} ${rateLabel}` : `${fmt(focused.cases)} recorded cases`;
+  }
   $("map-detail").innerHTML = focused
-    ? `<strong>${escape(focused.name)}</strong><span>${rate ? dec(focused.rate) + " per 100,000 residents (mean)" : fmt(focused.cases) + " recorded cases"}</span><span>${fmt(focused.present)} of ${fmt(focused.expected)} department-week cells have source rows. ${focused.present < focused.expected ? "Absent cells remain missing." : "Row availability does not establish complete case capture."}</span>`
+    ? `<strong>${escape(focused.name)}</strong><span>${focusedValue}</span><span>${fmt(focused.present)} of ${fmt(focused.expected)} department-week cells have source rows. ${focused.present < focused.expected ? "Absent cells remain missing." : "Row availability does not establish complete case capture."}</span>`
     : "<strong>Select a department</strong><span>Use the map or ranking to see its value and source-row availability here.</span>";
   const ranked = [...map].sort((a, b) => (val(b) ?? -1) - (val(a) ?? -1));
   $("rank-description").textContent = rate
-    ? "Mean across the selected years, using only the selected weeks. This is not an official dengue incidence measure."
-    : "All 33 department-level units; Bogotá remains unavailable. Select a row to inspect its weeks.";
+    ? "The bars use the map’s rate scale, based on total resident population. Select a department to inspect its weeks."
+    : "The bars rank all 33 department-level units by recorded cases. Select a department to inspect its weeks.";
   $("rank-table").innerHTML = ranked
     .map(
       (d) =>
-        `<div class="rank-row"><button type="button" data-code="${d.code}" aria-pressed="${d.code === state.department}">${escape(d.name)}</button><div class="rank-bar"><span style="width:${val(d) === null ? 0 : (100 * val(d)) / max}%"></span></div><span class="rank-number">${rate ? dec(val(d)) : fmt(val(d))}</span></div>`,
+        `<div class="rank-row"><button type="button" data-code="${d.code}" aria-pressed="${d.code === state.department}">${escape(d.name)}</button><div aria-hidden="true" class="rank-bar${val(d) === null ? " no-value" : ""}"><span style="width:${val(d) === null ? 0 : (100 * val(d)) / max}%"></span></div><span class="rank-number">${rate ? dec(val(d)) : fmt(val(d))}</span></div>`,
     )
     .join("");
   $("rank-table")
@@ -172,21 +180,32 @@ async function renderPlots() {
       state.department === "all"
         ? "Available department records"
         : data.departments.find((d) => d.code === state.department).name;
-  $("time-description").textContent =
-    `${name} · ${state.event === "210" ? "Dengue (210)" : "Severe dengue (220)"} · Source epidemiological year and week.`;
-  $("season-description").textContent =
-    `${name} · ${state.start}–${state.end} · Selected weeks ${state.first}–${state.last}.`;
+  const event = state.event === "210" ? "Dengue (210)" : "Severe dengue (220)";
+  const years = state.start === state.end ? state.start : `${state.start}–${state.end}`;
+  const context = `${name} · ${event} · ${years} · Weeks ${state.first}–${state.last}.`;
+  const peak = series.reduce((best, row) =>
+    row.cases !== null && (best === null || row.cases > best.cases) ? row : best, null);
+  const peakNote = peak
+    ? ` The highest available weekly total was ${fmt(peak.cases)} (${peak.label}).`
+    : "";
+  $("time-description").textContent = context + peakNote;
+  $("season-description").textContent = context;
   if (!any) {
+    const empty = series.length
+      ? "No source rows for this selection. Its weekly case count is unknown."
+      : "No epidemiological weeks match these dates. Adjust the year or week range.";
     for (const id of ["timeline", "seasonal"]) {
       Plotly.purge($(id));
-      $(id).innerHTML =
-        '<div class="empty-state">No source rows for this selection. No zero is inferred.<br>Choose another department or period, or use Reset.</div>';
+      $(id).removeAttribute("role");
+      $(id).innerHTML = `<div class="empty-state">${empty}</div>`;
     }
     return;
   }
   const token = renderToken;
-  for (const id of ["timeline", "seasonal"])
+  for (const id of ["timeline", "seasonal"]) {
+    $(id).setAttribute("role", "img");
     if (!$(id).classList.contains("js-plotly-plot")) $(id).innerHTML = "";
+  }
   const narrow = window.matchMedia("(max-width: 650px)").matches;
   const tick = series.filter((r, i) =>
       narrow
@@ -229,7 +248,7 @@ async function renderPlots() {
           .map((r) => r.cases),
         type: "scatter",
         mode: "markers",
-        marker: { color: "#a65b24", size: 4, symbol: "circle-open" },
+        marker: { color: "#934819", size: 7, symbol: "circle-open" },
         hoverinfo: "skip",
       },
     ],
@@ -262,7 +281,7 @@ async function renderPlots() {
         line: {
           color: colors[year],
           width: 2,
-          dash: year === 2021 ? "dash" : "solid",
+          dash: { 2019: "solid", 2020: "dot", 2021: "dash", 2022: "dashdot" }[year],
         },
         hovertemplate: `${year} W%{x}<br>%{y:,} recorded cases<extra></extra>`,
       });
@@ -271,6 +290,12 @@ async function renderPlots() {
 }
 function renderTable() {
   latestSummary = summaries(data, state);
+  const availability = annualAvailability(latestSummary);
+  $("annual-availability").innerHTML = availability.length
+    ? availability.map(({ year, present, expected }) => `
+        <li><strong>${year}</strong><span class="availability-track" aria-hidden="true"><span style="width:${100 * present / expected}%"></span></span><span>${fmt(present)} of ${fmt(expected)} cells</span></li>`
+      ).join("")
+    : '<li class="empty-period">No weeks in this selection.</li>';
   latestWeekly = selectedRows(data, state).map((r) => ({
     ...r,
     snapshot_date: data.meta.snapshot_date,
@@ -281,24 +306,45 @@ function renderTable() {
   }));
   $("download").disabled = !latestSummary.length;
   $("download-weekly").disabled = !latestWeekly.length;
+  const rowCount = latestSummary.length;
   $("table-description").textContent =
-    `${latestSummary.length} department-year rows for the current geographic and time filters. Blank CSV values mean unavailable; zeros, if reported, remain 0. Rates below use each row’s year-specific DANE total population, not official population-at-risk incidence. Scroll the table horizontally on smaller screens.`;
-  $("summary-table").innerHTML = latestSummary.length
-    ? `<table><caption class="visually-hidden">Filtered department-year summaries; cases are sums of available source records.</caption><thead><tr><th>Department</th><th>Year</th><th class="numeric">Recorded cases</th><th class="numeric">Population</th><th class="numeric">Cases per 100,000 residents</th><th>Weeks present</th><th>Availability</th></tr></thead><tbody>${latestSummary.map((r) => `<tr><td>${escape(r.department_name)}</td><td>${r.year}</td><td class="numeric">${fmt(r.cases)}</td><td class="numeric">${fmt(r.population_total)}</td><td class="numeric">${dec(r.cases_per_100k)}</td><td>${r.source_present_weeks}/${r.expected_weeks}</td><td>${r.availability === "no_source_rows" ? "No source rows" : r.availability === "partial_week_cells" ? "Some weeks absent" : "All week cells present"}</td></tr>`).join("")}</tbody></table>`
+    `${fmt(rowCount)} department-year ${rowCount === 1 ? "summary" : "summaries"} for the selected weeks. The downloads include source identifiers and dates.`;
+  const tableRows = latestSummary.map((r) => {
+    const missing = r.cases === null;
+    return `<tr${missing ? ' class="row-missing"' : ""}>
+      <th scope="row">${escape(r.department_name)}</th><td>${r.year}</td>
+      <td class="numeric${missing ? " value-missing" : ""}">${fmt(r.cases)}</td>
+      <td class="numeric">${fmt(r.population_total)}</td>
+      <td class="numeric${r.cases_per_100k === null ? " value-missing" : ""}">${dec(r.cases_per_100k)}</td>
+      <td class="numeric">${r.source_present_weeks} / ${r.expected_weeks}</td>
+    </tr>`;
+  });
+  $("summary-table").innerHTML = rowCount
+    ? `<table><caption class="visually-hidden">Department-year summaries for event ${state.event}, ${state.start}–${state.end}, weeks ${state.first}–${state.last}.</caption>
+       <thead><tr><th scope="col">Department</th><th scope="col">Year</th>
+       <th scope="col" class="numeric">Recorded cases</th><th scope="col" class="numeric">Total residents</th>
+       <th scope="col" class="numeric">Cases per 100,000 residents</th><th scope="col" class="numeric">Weeks with records / expected</th>
+       </tr></thead><tbody>${tableRows.join("")}</tbody></table>`
     : '<div class="empty-state">No periods match this selection. Set the first year/week before the last, or use Reset.</div>';
   const total = sumPresent(latestSummary.map((r) => r.cases)),
     present = latestSummary.reduce((a, r) => a + r.source_present_weeks, 0),
     expected = latestSummary.reduce((a, r) => a + r.expected_weeks, 0);
   $("kpi-cases").textContent = fmt(total);
-  $("kpi-event").textContent =
-    state.event === "210"
-      ? "Dengue · INS event 210"
-      : "Severe dengue · INS event 220";
   $("kpi-availability").textContent = `${fmt(present)} / ${fmt(expected)}`;
-  $("scope-note").textContent =
-    total === null
-      ? "No usable source rows in this selection. Absence is not evidence of zero cases."
-      : `${fmt(expected - present)} department-week cells have no source row. Counts sum the available records; field availability does not measure surveillance reporting completeness. ${state.department === "all" ? "Bogotá is unavailable and does not contribute to the count." : ""}`;
+  const singleYear = state.department !== "all" && state.start === state.end && rowCount === 1;
+  $("selected-rate").hidden = !singleYear;
+  $("kpi-rate").textContent = singleYear ? dec(latestSummary[0].cases_per_100k) : "";
+  let interpretation;
+  if (!expected) {
+    interpretation = "The selected years and weeks contain no valid observation period.";
+  } else if (total === null) {
+    interpretation = "The source contains no records for these weeks. The number of cases is unknown.";
+  } else if (present === expected) {
+    interpretation = "Every selected department-week has a source record. The surveillance system may still have missed cases.";
+  } else {
+    interpretation = `The case count sums available records. ${fmt(expected - present)} of ${fmt(expected)} department-week cells have no source row.`;
+  }
+  $("scope-note").textContent = interpretation;
   $("provenance-content").innerHTML =
     `<ul><li>Surveillance: <a href="${data.meta.source_url}">INS / Sivigila historical aggregates</a>, CC BY-SA 4.0. Retrieved ${data.meta.snapshot_date}; dataset last updated ${data.meta.source_data_updated_utc.slice(0, 10)}.</li><li>Geography: 32 departments plus Bogotá D.C. District municipality records are included once in their parent department; foreign and unknown geography are excluded.</li><li>Time: source epidemiological year/week, 52 weeks in 2019/2021/2022 and 53 in 2020. The metadata does not settle symptom onset versus notification date.</li><li>Population: DANE’s 2025 revision, matched by department and year. Annual table rate = available cases ÷ annual total population × 100,000. A multiyear map shows the arithmetic mean of these yearly rates, and requires a usable numerator and denominator for every selected year. Restricting weeks does not annualize the result.</li><li>Case status: INS describes the routine series as confirmed notifications; this extract has no individual classification fields. Events 210 and 220 are shown separately.</li></ul>`;
 }
@@ -309,8 +355,17 @@ async function render() {
     state.department === "all"
       ? "All department-level units"
       : data.departments.find((d) => d.code === state.department).name;
+  $("selection-heading").textContent = name;
+  const years = state.start === state.end ? state.start : `${state.start}–${state.end}`;
+  const event = state.event === "210" ? "Dengue (210)" : "Severe dengue (220)";
   $("selection").textContent =
-    `${name} · Event ${state.event} · ${state.start}–${state.end} · Weeks ${state.first}–${state.last} · Map: ${state.metric === "rate" ? "mean yearly selected-week cases per 100,000" : "recorded cases"}`;
+    `${event} · ${years} · Weeks ${state.first}–${state.last} · Map in ${state.metric === "rate" ? "cases per 100,000 residents" : "recorded cases"}`;
+  for (const link of document.querySelectorAll(".example-links a")) {
+    const current = [...new URLSearchParams(link.search)]
+      .every(([key, value]) => String(state[key]) === value);
+    if (current) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  }
   renderMap();
   renderTable();
   await renderPlots();

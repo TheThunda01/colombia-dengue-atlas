@@ -1,29 +1,25 @@
 # Colombia Dengue Surveillance Atlas
 
-**Brandon Huynh** · A reproducible atlas of reported dengue surveillance observations
-in Colombia, 2019–2022.
+**Brandon Huynh** · Reported dengue in Colombia, 2019–2022
 
-Repository: [TheThunda01/colombia-dengue-atlas](https://github.com/TheThunda01/colombia-dengue-atlas)
-· Live website:
-[Colombia Dengue Surveillance Atlas](https://thethunda01.github.io/colombia-dengue-atlas/).
-Updated for **v1.1.0** on 2 November 2026. Read the [visual and guide update](reports/visual-guide-review-2026-11-02.md)
-and the preserved [first-release report](RELEASE_REPORT.md) for verification scope.
+Why is Bogotá hatched on the map? In 2019, Colombia’s National Institute of Health (INS) published dengue records for Antioquia in all 52 weeks. They sum to 4,980 cases. The same extract has no dengue records for Bogotá, so the Atlas leaves its case count unknown.
+
+[Explore Antioquia in 2019](https://thethunda01.github.io/colombia-dengue-atlas/explore.html?department=05&event=210&start=2019&end=2019&first=1&last=52&metric=rate) · [Compare Bogotá](https://thethunda01.github.io/colombia-dengue-atlas/explore.html?department=11&event=210&start=2019&end=2019&first=1&last=52&metric=rate) · [Browse the full Atlas](https://thethunda01.github.io/colombia-dengue-atlas/)
+
+## Read a department comparison
+
+| Dengue in 2019 | Weeks with records | Recorded cases | Cases per 100,000 residents |
+| --- | ---: | ---: | ---: |
+| Antioquia | 52 of 52 | 4,980 | 76.4 |
+| Bogotá, D.C. | 0 of 52 | Unknown | Unavailable |
+
+The rate uses Antioquia’s total population of 6,518,070. A week counts as observed if at least one source row contributes. That tells us what the extract contains. It cannot tell us whether every municipality reported or every infection was detected. [Worked calculation](docs/practical-use.md) · [Department-year table](data/processed/map_comparison.csv)
 
 ## Why this project
 
-Reported case counts describe a surveillance system as well as a disease. This
-atlas helps researchers, students, and public health readers compare Colombian
-departments while seeing the source, geographic definitions, missing observations,
-and population denominator behind each view.
+A surveillance map can hide gaps in the data it displays. This Atlas lets readers inspect reported cases, geographic definitions, weekly coverage, and population denominators together. The [annotated build guide](docs/build-guide.md) follows one value from the source to the screen.
 
-Start with the [question and reasoning](docs/project-context.md), then the
-[dengue and surveillance concepts](docs/biology-and-concepts.md). The
-[annotated build guide](docs/build-guide.md) follows one value from source to screen.
-
-Within [From biological measurements to better experiments](https://github.com/TheThunda01/TheThunda01/blob/main/PROJECT_GUIDE.md),
-this project demonstrates spatial data preparation and evidence-aware scientific
-visualization. It is a separate surveillance workflow, not an integrated pipeline
-with the portfolio's molecular or experimental projects.
+The [portfolio guide](https://github.com/TheThunda01/TheThunda01/blob/main/PROJECT_GUIDE.md) places the Atlas alongside other public-health and biological measurement projects.
 
 ## What it does
 
@@ -90,12 +86,12 @@ of all infections or proof that every municipality reported.
 [Download the editable SVG](figures/map-comparison.svg) · [Vector PDF](figures/map-comparison.pdf) ·
 [132 department-year values](data/processed/map_comparison.csv)
 
-![Desktop atlas](docs/screenshots/desktop.png)
-
 <details>
-<summary>Narrow-screen view</summary>
+<summary>See the explorer on desktop and mobile</summary>
 
-![Narrow-screen atlas](docs/screenshots/mobile.png)
+![Desktop explorer showing the saved Antioquia selection for 2019](docs/screenshots/antioquia-2019-desktop.png)
+
+![Mobile explorer showing Bogotá’s missing 2019 dengue records](docs/screenshots/bogota-2019-mobile.png)
 
 </details>
 
@@ -107,9 +103,11 @@ views describe the same pinned input release.
 
 ## Practical use and limitations
 
-Choose an event, department, and comparable set of source weeks; inspect the
-availability counts before comparing years. Download the table to preserve the
-selection and its interpretation. Occurrence/procedence geography is not
+Choose an event and department, then use the same weeks for each year. Check the
+annual availability bars before comparing counts. If one year has fewer source
+rows, the two totals draw on different amounts of observed data. The labels
+show how many department-week cells contributed and how many were possible.
+Download the summary to keep those counts with your selection. Occurrence/procedence geography is not
 necessarily residence, and the API does not establish whether weeks derive from
 notification or symptom onset. The atlas preserves the source week labels,
 including week 53 in 2020, rather than relabeling them as calendar dates.

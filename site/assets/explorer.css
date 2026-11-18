@@ -1,0 +1,63 @@
+/* Keep the selected values and their missingness visible ahead of the controls. */
+.selection-summary {
+  margin-block: 1rem 1.3rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid #b4c9c7;
+  border-top: 4px solid var(--teal);
+  background: #f4f8f6;
+}
+.selection-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+}
+.selection-intro h2 { margin: 0 0 .15rem; font-size: clamp(1.35rem, 2.6vw, 2rem); }
+.selection-intro p, .selection-summary > p { margin: 0; font-size: .94rem; }
+.example-links { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .8rem; }
+.example-links span { color: var(--muted); font-size: .82rem; }
+.example-links a { padding-block: .45rem; font-size: .9rem; font-weight: 650; }
+.example-links a[aria-current] { text-decoration-thickness: 3px; text-underline-offset: .22em; }
+.selection-values { display: flex; flex-wrap: wrap; gap: 1rem 2.7rem; margin: 1.3rem 0 .8rem; }
+.selection-values dt { font-weight: 600; color: var(--muted); font-size: .85rem; }
+.selection-values dd {
+  margin: .1rem 0 0;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.18;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+.selection-summary > p { margin-top: 1rem; max-width: 88ch; }
+#atlas .availability-panel { margin-block: 1.5rem; }
+#atlas .availability-panel h2 { margin-top: 0; }
+.availability-track, .rank-bar.no-value {
+  background: repeating-linear-gradient(135deg,#e9eeeb 0 3px,#a0adaa 3px 4px);
+}
+#atlas .rank-number, #atlas .table-scroll { font-variant-numeric: tabular-nums; }
+#atlas .table-scroll th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #fff;
+  font-weight: 600;
+}
+#atlas .table-scroll thead th { z-index: 2; vertical-align: bottom; }
+#atlas .table-scroll thead th:first-child { left: 0; z-index: 3; }
+#atlas .table-scroll .row-missing td, #atlas .table-scroll .row-missing th[scope="row"] {
+  background: #f1f4f2;
+}
+#atlas .table-scroll .value-missing { color: var(--muted); font-style: italic; }
+#atlas .table-scroll td, #atlas .table-scroll th { padding: .6rem .75rem; }
+#atlas .table-scroll thead th { white-space: normal; min-width: 5rem; }
+#atlas .table-scroll tbody th { white-space: normal; min-width: 8rem; }
+#atlas .plot:has(.empty-state) { height: auto; }
+#atlas .chart-section h2, #atlas .map-panel h2 { margin-top: 0; }
+@media (max-width: 650px) {
+  .selection-values { gap: .8rem 1.5rem; }
+  .selection-values dt { font-size: .78rem; }
+  .example-links a { min-height: 44px; display: inline-flex; align-items: center; }
+  #atlas .availability-panel { padding: 1rem; }
+  #atlas .table-scroll { max-height: 420px; }
+}
